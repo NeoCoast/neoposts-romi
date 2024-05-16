@@ -1,0 +1,30 @@
+.signup_exterior_container {
+  margin-top: 10%;
+  background-color: #ebf3fa; 
+  border-radius: 2%; 
+  max-width: 600px; 
+  border: solid #c3cce8;
+}
+
+.title {
+  padding-top: 5%; 
+  margin-bottom: 3%;
+}
+
+.form_container {
+  min-height: 80vh;
+}
+
+.submit_button {
+  text-align: center;
+}
+
+.login_alt_button {
+  text-align: center; 
+  padding: 3%;
+}
+
+.signup_errors{
+  font-size: x-small;
+  color: red;
+}
