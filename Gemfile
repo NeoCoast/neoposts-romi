@@ -66,3 +66,7 @@ gem 'haml-rails', '~> 2.0'
 gem 'html2haml', '~> 2.3'
 
 gem 'lefthook', '~> 1.6', '>= 1.6.10'
+
+gem 'devise', '~> 4.9', '>= 4.9.4'
+
+gem 'image_processing', '>= 1.2'

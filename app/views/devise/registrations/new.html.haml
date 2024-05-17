@@ -1,0 +1,67 @@
+.container.align-items-center.signup_exterior_container
+  %h2.text-center.title Sign up
+  .container.d-flex.align-items-center.justify-content-center.form_container
+    .row
+      .col
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          .field.row.mb-3
+            .col
+              = f.label :email, class: 'col-form-label'
+            .col
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+              = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:email], type: 'Email' }
+          .field.row.mb-3
+            .col
+              = f.label :password, class: 'form-label'
+              - if @minimum_password_length
+                %em
+                  (#{@minimum_password_length} characters minimum)
+              %br/
+            .col
+              = f.password_field :password, autocomplete: "new-password", class: 'form-control'
+              = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:password], type: 'Password' }
+          .field.row.mb-3
+            .col
+              = f.label :password_confirmation, class: 'form-label'
+              %br/
+            .col
+              = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'
+              = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:password], type: 'Password' }
+          .field.row.mb-3
+            .col
+              = f.label :nickname, class: 'form-label'
+              %br/
+            .col
+              = f.text_field :nickname, class: 'form-control'
+              = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:nickname], type: 'Nickname' }
+          .field.row.mb-3
+            .col
+              = f.label :first_name, class: 'form-label'
+              %br/
+            .col
+              = f.text_field :first_name, class: 'form-control'
+              = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:first_name], type: 'First Name' }
+          .field.row.mb-3
+            .col
+              = f.label :last_name, class: 'form-label'
+              %br/
+            .col
+              = f.text_field :last_name, class: 'form-control'
+              = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:last_name], type: 'Last Name' }
+          .field.row.mb-3
+            .col
+              = f.label :birthday, class: 'form-label'
+              %br/
+            .col
+              = f.date_field :birthday, class: 'form-control'
+              = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:birthday], type: 'Birthday' }
+          .field.row.mb-3
+            .col
+              =f.label :profile_picture, class: 'form-label'
+              %br/
+            .col
+              = f.file_field :profile_picture, accept: 'image/png,image/jpeg', class: 'form-control'
+          .actions.submit_button
+            = f.submit "Sign up", class: 'btn btn-primary'
+          .container.login_alt_button
+            = render "devise/shared/links"
