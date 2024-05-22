@@ -1,4 +1,4 @@
-.container.align-items-center.signup_exterior_container
+.container.align-items-center.signup_exterior_container.justify_content_center
   %h2.text-center.title Sign up
   .container.d-flex.align-items-center.justify-content-center.form_container
     .row
@@ -57,7 +57,7 @@
               = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:birthday], type: 'Birthday' }
           .field.row.mb-3
             .col
-              =f.label :profile_picture, class: 'form-label'
+              = f.label :profile_picture, class: 'form-label'
               %br/
             .col
               = f.file_field :profile_picture, accept: 'image/png,image/jpeg', class: 'form-control'
