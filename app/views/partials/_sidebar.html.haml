@@ -1,18 +1,13 @@
 .container.sidebar_exterior_container.justify-content-start.align-content-center
   .col-md-12
     .sidebar
-      - if @post.user.profile_picture.attached?
-        = image_tag url_for(@post.user.profile_picture), alt: 'User Image', class: 'user-image'
+      - if current_user.profile_picture.attached?
+        = image_tag url_for(current_user.profile_picture), alt: 'User Image', class: 'user-image'
       - else
         = image_tag 'user_picture.jpg', alt: 'Default Profile Image', class: 'user-image'
-      %p.fullname_paragraph.sidebar-item #{@post.user.first_name} #{@post.user.last_name}
-      %p.sidebar-item @#{@post.user.nickname}
+      %p.fullname_paragraph.sidebar-item #{current_user.first_name} #{current_user.last_name}
+      %p.sidebar-item @#{current_user.nickname}
       = link_to "New Post", new_post_path, class: 'create_post_button'
       %hr
-  .container.user-data
-    %p Posts:
-    %p Following:
-    %p Followers:
-    %hr
   .containter
-    %a.sign-out Sign out
+    = button_to "Sign out", destroy_user_session_path, method: :delete, class: 'sign-out'

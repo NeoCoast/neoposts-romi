@@ -33,6 +33,43 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
+  describe 'GET index' do
+    context 'when user is authenticated' do
+      let!(:user) { create(:user) }
+      let!(:posts) { create_list(:post, 6, user:) }
+
+      before do
+        sign_in user
+      end
+
+      it 'returns HTTP success' do
+        get root_path
+        expect(response).to be_successful
+      end
+
+      it 'shows created posts' do
+        get root_path
+        posts.each do |post|
+          expect(response.body).to include(post.body)
+        end
+      end
+
+      it 'shows created posts ordered by the newest created' do
+        get root_path
+        expect(assigns(:posts)).to eq(posts.sort_by(&:published_at).reverse)
+      end
+    end
+
+    context 'when user is not authenticated' do
+      let!(:post) { create(:post) }
+
+      it 'redirects to sign in' do
+        get root_path
+        expect(response).to redirect_to(user_session_path)
+      end
+    end
+  end
+
   describe 'NEW post' do
     context 'when user is authenticated' do
       let!(:user) { create(:user) }

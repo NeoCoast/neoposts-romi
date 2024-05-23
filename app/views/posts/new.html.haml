@@ -1,23 +1,25 @@
-.container.back_container
-  %a.btn.back_button{href: ""} Back
-.container.align-items-center.create_post_exterior_container
-  %h4.add_post Add new post
-  .container.d-flex.align-items-center.justify-content-center
-    .form-container
-      = form_for @post, html: { class: 'w-100' } do |f|
-        .field.row.mb-3
-          .col-md-10
-            = f.text_field :title, placeholder: 'Title', class: 'post_title'
-            = render partial: 'post_error_messages', locals: { errors: @post.errors[:title], type: 'Title' }
-        .field.row.mb-3
-          .col-md-3
-            = f.text_area :body, placeholder: 'Share something with your team!', class: 'area'
-            = render partial: 'post_error_messages', locals: { errors: @post.errors[:body], type: 'Body' }
-        .field.row.mb-3
-          .col-md-10
-            .d-flex.justify-content-between
-              .d-flex
-                = f.file_field :image, accept: 'image/png,image/jpeg', id: 'actual-btn'
-                = f.label 'Add image', for: 'actual-btn', class: 'add_image_button'
-              .ms-auto
-                = f.submit 'Post', class: 'post_button'
+.container-fluid
+  .row.create-post
+    .container.back_container
+      %a.btn.back_button{href: ""} Back
+    .container.align-items-center.create_post_exterior_container
+      %h4.add_post Add new post
+      .container.d-flex.align-items-center.justify-content-center
+        .form-container
+          = form_for @post, html: { class: 'w-100' } do |f|
+            .field.row.mb-3
+              .col-md-10
+                = f.text_field :title, placeholder: 'Title', class: 'post_title'
+                = render partial: 'post_error_messages', locals: { errors: @post.errors[:title], type: 'Title' }
+            .field.row.mb-3
+              .col-md-3
+                = f.text_area :body, placeholder: 'Share something with your team!', class: 'area'
+                = render partial: 'post_error_messages', locals: { errors: @post.errors[:body], type: 'Body' }
+            .field.row.mb-3
+              .col-md-10
+                .d-flex.justify-content-between
+                  .d-flex
+                    = f.file_field :image, accept: 'image/png,image/jpeg', id: 'actual-btn'
+                    = f.label 'Add image', for: 'actual-btn', class: 'add_image_button'
+                  .ms-auto
+                    = f.submit 'Post', class: 'post_button'
