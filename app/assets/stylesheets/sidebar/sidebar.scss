@@ -1,0 +1,55 @@
+.sidebar_exterior_container {
+  background-color: #ffffff; 
+  border-radius: 10px;
+  max-width: 250px; 
+  max-height: 500px;
+  border: solid #c3cce8;
+  margin-left: 40px;
+  margin-top: 62px;
+  margin-right: 20px;
+
+  .fullname_paragraph {
+    inline-size: max-content;
+    font-weight: 500;
+  }
+
+  .sidebar_picture {
+    border: 50%;
+  }
+}
+
+hr {
+  border: 1px solid #566d96;
+  width: 250px;
+  align-self: center;
+}
+
+.user-data {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  color: #566d96;
+}
+
+.sign-out {
+  color: #566d96;
+  font-size: small;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.sidebar-item {
+  color: #566d96;
+  font-weight: 200;
+}
+
+.user-image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}

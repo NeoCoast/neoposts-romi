@@ -46,6 +46,8 @@ group :test do
   gem 'database_cleaner-active_record', '~> 2.1'
 
   gem 'faker', '~> 3.3', '>= 3.3.1'
+
+  gem 'rails-controller-testing', '>= 1.0.1'
 end
 
 group :development do
