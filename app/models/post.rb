@@ -9,6 +9,8 @@ class Post < ApplicationRecord
 
   has_one_attached :image
 
+  scope :newest_first, -> { order(published_at: :desc) }
+
   private
 
   def set_post_datetime

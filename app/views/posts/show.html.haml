@@ -1,21 +1,22 @@
 .container-fluid
   .row
     = render 'partials/sidebar'
-    .container.show_post_exterior_container
-      .container.post_back_container
-        %a.btn.post_back_button{href: ""} Back
-      .container.show_post_container.justify-content-start
-        .col-md-2
-          - if @post.user.profile_picture.attached?
-            = image_tag url_for(@post.user.profile_picture), class: 'post-user-image', alt: 'User Image'
-          - else
-            = image_tag 'user_picture.jpg', class: 'post-user-image', alt: 'Default Profile Image'
-        .col-md-9
-          .post-container
-            %p.fullname_paragraph #{@post.user.first_name} #{@post.user.last_name}
-            %p @#{@post.user.nickname}
-            .container.post-content
-              %h5= @post.title
-              %p= @post.body
-              - if @post.image.attached?
-                = image_tag url_for(@post.image), alt: 'Post Image'
+    .container.show_post_exterior_container.justify-content-start
+      .col-md-12
+        .container.post_back_container
+          %a.btn.post_back_button{href: ""} Back
+        .container.show_post_container.justify-content-start
+          .col-md-2
+            - if @post.user.profile_picture.attached?
+              = image_tag url_for(@post.user.profile_picture), class: 'post-user-image', alt: 'User Image'
+            - else
+              = image_tag 'user_picture.jpg', class: 'post-user-image', alt: 'Default Profile Image'
+          .col-md-9
+            .post-container
+              %p.fullname_paragraph #{@post.user.first_name} #{@post.user.last_name}
+              %p @#{@post.user.nickname}
+              .container.post-content
+                %h5= @post.title
+                %p= @post.body
+                - if @post.image.attached?
+                  = image_tag url_for(@post.image), alt: 'Post Image', class: 'post-image'
