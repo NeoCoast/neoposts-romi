@@ -1,0 +1,16 @@
+.post-container
+  .row
+    .col-md-2
+      - if post.user.profile_picture.attached?
+        = image_tag url_for(post.user.profile_picture), alt: 'User Image', class: 'post-user-image'
+      - else
+        = image_tag 'user_picture.jpg', alt: 'Default Profile Image', class: 'post-user-image'
+    .col-md-9
+      .post-container
+        %p.fullname_paragraph #{post.user.first_name} #{post.user.last_name}
+        %p @#{post.user.nickname}
+        .container.post-content
+          %h5= post.title
+          %p= post.body
+          - if post.image.attached?
+            = image_tag url_for(post.image), alt: 'Post Image', class: 'post-image'
