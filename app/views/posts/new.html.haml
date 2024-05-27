@@ -1,7 +1,7 @@
 .container-fluid
   .row.create-post
     .container.back_container
-      %a.btn.back_button{href: ""} Back
+      = link_to "Back", root_path, class: 'back_button'
     .container.align-items-center.create_post_exterior_container
       %h4.add_post Add new post
       .container.d-flex.align-items-center.justify-content-center

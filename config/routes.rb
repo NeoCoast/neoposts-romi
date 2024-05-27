@@ -11,4 +11,5 @@ Rails.application.routes.draw do
 
   resources :posts, only: [:show, :new, :create]
 
+  get 'users/:nickname', to: 'users#show', as: 'show_user', nickname: /[^\/]+/
 end

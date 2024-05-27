@@ -1,12 +1,12 @@
-.container.sidebar_exterior_container.justify-content-start.align-content-center
+.container.sidecard_exterior_container.justify-content-start.align-content-center
   .col-md-12
-    .sidebar
+    .sidecard
       - if current_user.profile_picture.attached?
         = image_tag url_for(current_user.profile_picture), alt: 'User Image', class: 'user-image'
       - else
         = image_tag 'user_picture.jpg', alt: 'Default Profile Image', class: 'user-image'
-      %p.fullname_paragraph.sidebar-item #{current_user.first_name} #{current_user.last_name}
-      %p.sidebar-item @#{current_user.nickname}
+      %p.fullname_paragraph.sidecard-item #{current_user.first_name} #{current_user.last_name}
+      %p.sidecard-item @#{current_user.nickname}
       = link_to "New Post", new_post_path, class: 'create_post_button'
       %hr
   .containter

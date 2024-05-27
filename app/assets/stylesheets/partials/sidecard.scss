@@ -1,4 +1,4 @@
-.sidebar_exterior_container {
+.sidecard_exterior_container {
   background-color: #ffffff; 
   border-radius: 10px;
   max-width: 200px; 
@@ -11,10 +11,6 @@
   .fullname_paragraph {
     inline-size: max-content;
     font-weight: 500;
-  }
-
-  .sidebar_picture {
-    border: 50%;
   }
 }
 
@@ -34,14 +30,14 @@ hr {
   cursor: pointer;
 }
 
-.sidebar {
+.sidecard {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.sidebar-item {
+.sidecard-item {
   color: #566d96;
   font-weight: 200;
 }
