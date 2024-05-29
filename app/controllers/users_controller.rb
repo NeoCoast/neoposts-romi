@@ -2,9 +2,6 @@
 
 class UsersController < ApplicationController
   def show
-    @user = User.find_by(nickname: params[:nickname])
-    return if @user
-
-    redirect_to root_path, alert: 'User not found'
+    @user = User.find_by!(nickname: params[:nickname])
   end
 end

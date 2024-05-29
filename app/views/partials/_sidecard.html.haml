@@ -1,12 +1,13 @@
 .container.sidecard_exterior_container.justify-content-start.align-content-center
   .col-md-12
     .sidecard
-      - if current_user.profile_picture.attached?
-        = image_tag url_for(current_user.profile_picture), alt: 'User Image', class: 'user-image'
-      - else
-        = image_tag 'user_picture.jpg', alt: 'Default Profile Image', class: 'user-image'
-      %p.fullname_paragraph.sidecard-item #{current_user.first_name} #{current_user.last_name}
-      %p.sidecard-item @#{current_user.nickname}
+      = link_to show_user_path(current_user.nickname) do
+        - if current_user.profile_picture.attached?
+          = image_tag url_for(current_user.profile_picture), alt: 'User Image', class: 'user-image'
+        - else
+          = image_tag 'user_picture.jpg', alt: 'Default Profile Image', class: 'user-image'
+      = link_to "#{current_user.first_name} #{current_user.last_name}", show_user_path(current_user.nickname), class: 'fullname_paragraph sidecard-item'
+      = link_to "@#{current_user.nickname}", show_user_path(current_user.nickname), class: 'nickname_paragraph sidecard-item'
       = link_to "New Post", new_post_path, class: 'create_post_button'
       %hr
   .containter

@@ -17,11 +17,26 @@
 
 .submit_button {
   text-align: center;
+  margin-top: 12px;
+}
+
+.signup-btn {
+  width: 90px;
+  background: #566d96;
+  border: #566d96;
+}
+
+.login-alt-btn {
+  width: 200px;
+  margin: 0;
 }
 
 .login_alt_button {
   text-align: center; 
-  padding: 3%;
+  margin-top: 13px;
+  background: rgb(157, 157, 157);
+  border: rgb(157, 157, 157);
+  width: 80px;
 }
 
 .signup_errors {

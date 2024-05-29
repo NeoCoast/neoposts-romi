@@ -13,7 +13,7 @@
                 = image_tag url_for(@user.profile_picture), class: 'user-picture', alt: 'User Image'
               - else
                 = image_tag 'user_picture.jpg', class: 'user-picture', alt: 'Default Profile Image'
-              .container
+              .container.user-information-text
                 .container.d-flex
                   %p.user_name #{@user.first_name} #{@user.last_name}
                   %p.user_nickname @#{@user.nickname}
