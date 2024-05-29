@@ -1,0 +1,17 @@
+.navbar {
+  background-color: #cddef0;
+  margin: 0;
+  max-width: none;
+  flex-wrap: nowrap;
+}
+
+.navbar-container {
+  margin: 0;
+  min-width: -webkit-fill-available;
+}
+
+.navbar-header {
+  img {
+    width: 200px;
+  }
+}

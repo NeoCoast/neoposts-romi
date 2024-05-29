@@ -1,0 +1,28 @@
+.container.d-flex-column.login_exterior_container
+  %h2.text-center.login_title Log in
+  .container.d-flex.justify-content-center
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .field.d-flex.row.mb-3
+        .col
+          = f.label :email, class: 'col-form-label'
+          %br/
+        .col-sm-8
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+      .field.d-flex.row.mb-3
+        .col
+          = f.label :password, class: 'col-form-label'
+          %br/
+        .col-sm-8
+          = f.password_field :password, autocomplete: "current-password", class: 'form-control'
+      - if devise_mapping.rememberable?
+        .field
+          = f.check_box :remember_me
+          = f.label :remember_me
+      .container.login-alert
+        = flash[:alert]
+      .container.d-flex
+        .container
+          = render "devise/shared/links"
+        .actions.d-flex.justify-content-center.login_button
+          = f.submit "Log in", class: "btn btn-primary login-btn"
+

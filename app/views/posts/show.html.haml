@@ -1,0 +1,22 @@
+.container-fluid
+  .row
+    = render 'partials/sidecard'
+    .container.show_post_exterior_container.justify-content-start
+      .col-md-12
+        .container.post_back_container
+          = link_to "Back", root_path, class: 'post_back_button'
+        .container.show_post_container.justify-content-start
+          .col-md-2
+            - if @post.user.profile_picture.attached?
+              = image_tag url_for(@post.user.profile_picture), class: 'post-user-image', alt: 'User Image'
+            - else
+              = image_tag 'user_picture.jpg', class: 'post-user-image', alt: 'Default Profile Image'
+          .col-md-9
+            .post-container
+              = link_to "#{@post.user.first_name} #{@post.user.last_name}", show_user_path(@post.user.nickname), class: 'post-link fullname'
+              = link_to "@#{@post.user.nickname}", show_user_path(current_user.nickname), class: 'post-link'
+              .container.post-content
+                %h5= @post.title
+                %p= @post.body
+                - if @post.image.attached?
+                  = image_tag url_for(@post.image), alt: 'Post Image', class: 'post-image'

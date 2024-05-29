@@ -1,0 +1,55 @@
+.sidecard_exterior_container {
+  background-color: #ffffff; 
+  border-radius: 10px;
+  max-width: 200px; 
+  max-height: 330px;
+  border: solid #c3cce8;
+  margin-left: 150px;
+  margin-top: 62px;
+  margin-right: 20px;
+
+  .fullname_paragraph {
+    inline-size: max-content;
+    font-weight: 500;
+    padding-top: 10px;
+  }
+  .nickname_paragraph {
+    inline-size: max-content;
+    padding-bottom: 10px;
+  }
+}
+
+hr {
+  border: 1px solid #566d96;
+  width: 200px;
+  align-self: center;
+}
+
+.sign-out {
+  color: #566d96;
+  font-size: small;
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sidecard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.sidecard-item {
+  color: #566d96;
+  font-weight: 200;
+  text-decoration: none;
+}
+
+.user-image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}

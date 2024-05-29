@@ -46,6 +46,8 @@ group :test do
   gem 'database_cleaner-active_record', '~> 2.1'
 
   gem 'faker', '~> 3.3', '>= 3.3.1'
+
+  gem 'rails-controller-testing', '>= 1.0.1'
 end
 
 group :development do
@@ -66,3 +68,7 @@ gem 'haml-rails', '~> 2.0'
 gem 'html2haml', '~> 2.3'
 
 gem 'lefthook', '~> 1.6', '>= 1.6.10'
+
+gem 'devise', '~> 4.9', '>= 4.9.4'
+
+gem 'image_processing', '>= 1.2'
