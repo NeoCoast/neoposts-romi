@@ -18,7 +18,11 @@
         .field
           = f.check_box :remember_me
           = f.label :remember_me
-      .actions.d-flex.justify-content-center.login_button
-        = f.submit "Log in", class: "btn btn-primary"
-      .container.d-flex.justify-content-center.signup_alt_button
-        = render "devise/shared/links"
+      .container.login-alert
+        = flash[:alert]
+      .container.d-flex
+        .container
+          = render "devise/shared/links"
+        .actions.d-flex.justify-content-center.login_button
+          = f.submit "Log in", class: "btn btn-primary login-btn"
+

@@ -11,7 +11,7 @@
   margin-left: 5%;
 }
 
-.new-post-container{
+.new-post-container {
   width: 20%;
   flex: 0 0 0%;
 }
@@ -30,7 +30,7 @@
 }
 
 .show_user_exterior_container {
-  max-width: 700px; 
+  max-width: 900px; 
   margin: 0;
 }
 
@@ -56,15 +56,20 @@
 
 .user-information {
   margin-top: 20px;
+  margin-bottom: 10px;
   height: 70px;
   color: #566d96;
   margin-left: 15px;
 }
 
 .user-picture {
- height: 70px;
+ height: 80px;
  border-radius: 100%;
- width: 70px;
+ width: 80px;
+}
+
+.user-information-text {
+  padding-left: 35px;
 }
 
 .user_name {
@@ -86,12 +91,12 @@
 }
 
 .users_profile_separation {
-  width: 675px;
+  width: 875px;
 }
 
 .user-stats-content {
   width: 200px;
-  margin-left: 50px;
+  margin-left: 80px;
   text-align: center;
   color: #566d96;
   font-weight: bold;

@@ -61,7 +61,8 @@
               %br/
             .col
               = f.file_field :profile_picture, accept: 'image/png,image/jpeg', class: 'form-control'
-          .actions.submit_button
-            = f.submit "Sign up", class: 'btn btn-primary'
-          .container.login_alt_button
-            = render "devise/shared/links"
+          .container.d-flex.justify-content-around
+            .container.login-alt-btn
+              = render "devise/shared/links"
+            .actions.submit_button
+              = f.submit "Sign up", class: 'btn btn-primary signup-btn'

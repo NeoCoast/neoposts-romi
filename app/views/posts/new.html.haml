@@ -19,7 +19,7 @@
               .col-md-10
                 .d-flex.justify-content-between
                   .d-flex
-                    = f.file_field :image, accept: 'image/png,image/jpeg', id: 'actual-btn'
-                    = f.label 'Add image', for: 'actual-btn', class: 'add_image_button'
-                  .ms-auto
+                    = f.label :image, 'Add image', class: 'add_image_button', for: 'actual-btn'
+                    = f.file_field :image, accept: 'image/png,image/jpeg', id: 'actual-btn', class: 'file-input'
+
                     = f.submit 'Post', class: 'post_button'

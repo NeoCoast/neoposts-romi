@@ -11,6 +11,11 @@
   .fullname_paragraph {
     inline-size: max-content;
     font-weight: 500;
+    padding-top: 10px;
+  }
+  .nickname_paragraph {
+    inline-size: max-content;
+    padding-bottom: 10px;
   }
 }
 
@@ -40,6 +45,7 @@ hr {
 .sidecard-item {
   color: #566d96;
   font-weight: 200;
+  text-decoration: none;
 }
 
 .user-image {
