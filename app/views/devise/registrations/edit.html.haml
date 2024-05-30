@@ -1,56 +1,64 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    = f.label :nickname
-    %br/
-    = f.text_field :nickname
-  .field
-    = f.label :first_name
-    %br/
-    = f.text_field :first_name
-  .field
-    = f.last_name :last_name
-    %br/
-    = f.text_field :last_name
-  .field
-    = f.birthday :birthday
-    %br/
-    = f.date_field :birthday
-  .field
-    =f.labeL :profile_picture
-    %br/
-    = f.image_field :profile_picture
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      %br/
-      %em
-        = @minimum_password_length
-        characters minimum
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "Update"
-%h3 Cancel my account
-%div
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+.container-fluid.flex-column
+  .container.back-container
+    = link_to "Back", show_user_path(@user.nickname), class: 'back_button'
+  .container.edit-user-exterior-container
+    %h2.edit-title
+      Edit #{resource_name.to_s.humanize}
+    .container.edit-user-form
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        .field.d-flex.row.mb-3
+          .col-md-4
+            = f.label :email, class: 'edit-label'
+          .col-md-6
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: 'edit-field'
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+        .field.d-flex.row.mb-3
+          .col-md-4
+            = f.label :nickname, class: 'edit-label'
+          .col-md-6
+            = f.text_field :nickname, class: 'edit-field'
+        .field.d-flex.row.mb-3
+          .col-md-4
+            = f.label :first_name, class: 'edit-label'
+          .col-md-6
+            = f.text_field :first_name, class: 'edit-field'
+        .field.d-flex.row.mb-3
+          .col-md-4
+            = f.label :last_name, class: 'edit-label'
+          .col-md-6
+            = f.text_field :last_name, class: 'edit-field'
+        .field.d-flex.row.mb-3
+          .col-md-4
+            = f.label :birthday, class: 'edit-label'
+          .col-md-6
+            = f.date_field :birthday
+        .field.d-flex.row.mb-3
+          .col-md-4
+            =f.label :profile_picture, class: 'edit-label'
+          .col-md-6
+            = f.file_field :profile_picture, accept: 'image/png,image/jpeg'
+        .field
+          = f.label :password, class: 'edit-label'
+          %i.edit-label (leave blank if you don't want to change it)
+          .row
+            .col-md-10.d-flex
+              = f.password_field :password, autocomplete: "password", class: 'edit-field'
+              = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm password", class: 'edit-field confirm-password'
+          .row
+            .col-md-9
+              = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:password], type: 'Password' }
+              = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:password_confirmation], type: 'Password confirmation' }
+        .field.current-password-box
+          = f.label :current_password, class: 'edit-label'
+          %i.edit-label (we need your current password to confirm your changes)
+          .container.current-password-field
+            .row
+              .col-md-4
+                = f.password_field :current_password, autocomplete: "current-password", class: 'edit-field'
+            .row
+              .col-md-4
+                = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:current_password], type: 'Password' }
+        .actions
+          = f.submit "Update", class: 'update-button'
