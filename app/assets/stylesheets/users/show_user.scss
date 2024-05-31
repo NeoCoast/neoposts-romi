@@ -70,6 +70,7 @@
 
 .user-information-text {
   padding-left: 35px;
+  padding-top: 10px;
 }
 
 .user_name {
@@ -92,6 +93,19 @@
 
 .users_profile_separation {
   width: 875px;
+}
+
+.button-container {
+  padding-top: 10px;
+  text-align-last: center;
+}
+
+.edit_profile_button {
+  text-decoration: none;
+  color: #566d96;
+  border: solid #566d96;
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 
 .user-stats-content {

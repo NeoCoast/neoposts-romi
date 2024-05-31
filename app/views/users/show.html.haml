@@ -6,7 +6,7 @@
       .container.show_user_exterior_container.justify-content-start
         .col-md-12
           .container.users_back_container
-            = link_to "Back", root_path, class: 'post_back_button'
+            = link_to "Back", root_path, class: 'back_button'
           .container.show_user_container.justify-content-start
             .container.user-information.d-flex
               - if @user.profile_picture.attached?
@@ -20,6 +20,9 @@
                 .container.d-flex.user_dates
                   %p.user_birthday Born #{@user.birthday.strftime("%m/%d/%Y")}
                   %p Joined #{@user.created_at.strftime("%m/%d/%Y")}
+              - if @user == current_user
+                .container.align-content-center.button-container
+                  = link_to "Edit Profile", edit_user_registration_path, class: 'edit_profile_button'
             %hr.users_profile_separation
               .container.user-stats-content
                 %p.post-count #{@user.posts.count}
