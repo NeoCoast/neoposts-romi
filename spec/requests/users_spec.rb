@@ -105,4 +105,44 @@ RSpec.describe 'Users', type: :request do
       end
     end
   end
+
+  describe 'GET index' do
+    let!(:users) { create_list(:user, 8) }
+    let!(:user) { users.first }
+
+    context 'when user is authenticated' do
+      before do
+        sign_in user
+      end
+
+      it 'returns HTTP success' do
+        get users_path
+        expect(response).to be_successful
+      end
+
+      it 'shows user list' do
+        total_pages = User.page.total_pages
+        (1..total_pages).each do |page|
+          get users_path, params: { page: }
+          users_on_page = User.order(:first_name).page(page).per(User.default_per_page)
+          users_on_page.each do |user|
+            expect(response.body).to include(user.nickname)
+            expect(response.body).to include(user.first_name)
+            expect(response.body).to include(user.last_name)
+          end
+        end
+      end
+    end
+
+    context 'when user is not authenticated' do
+      before do
+        sign_out user
+      end
+
+      it 'redirects to sign in' do
+        get users_path
+        expect(response).to redirect_to(user_session_path)
+      end
+    end
+  end
 end

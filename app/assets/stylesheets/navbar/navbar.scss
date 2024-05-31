@@ -8,10 +8,23 @@
 .navbar-container {
   margin: 0;
   min-width: -webkit-fill-available;
+  height: 40px;
 }
 
 .navbar-header {
   img {
     width: 200px;
+    margin-left: 20px;
   }
+}
+
+.list-users-button {
+  width: 130px;
+  margin: 0;
+}
+
+.list-users-link {
+  text-decoration: none;
+  color: #566d96;
+  padding: 10px;
 }
