@@ -11,4 +11,6 @@ class User < ApplicationRecord
   has_one_attached :profile_picture
 
   has_many :posts, dependent: :destroy
+
+  paginates_per 5
 end

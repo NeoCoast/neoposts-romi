@@ -11,6 +11,7 @@
             = f.label :email, class: 'edit-label'
           .col-md-6
             = f.email_field :email, autofocus: true, autocomplete: "email", class: 'edit-field'
+          = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:email], type: 'Email' }
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
           %div
             Currently waiting confirmation for: #{resource.unconfirmed_email}
@@ -19,6 +20,7 @@
             = f.label :nickname, class: 'edit-label'
           .col-md-6
             = f.text_field :nickname, class: 'edit-field'
+          = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:nickname], type: 'Nickname' }
         .field.d-flex.row.mb-3
           .col-md-4
             = f.label :first_name, class: 'edit-label'

@@ -3,7 +3,10 @@
     = render 'partials/sidecard'
     .container.home_exterior_container.justify-content-start
       .col-md-12
-        - @posts.each_with_index do |post, index|
-          = render partial: 'partials/post', locals: { post: post }
-          - unless index == @posts.size - 1
-            %hr.post-separation
+        - if @posts.any?
+          - @posts.each_with_index do |post, index|
+            = render partial: 'partials/post', locals: { post: post }
+            - unless index == @posts.size - 1 || @posts.count==0
+              %hr.post-separation
+        - else
+          %p.no-posts No posts to show :(

@@ -40,7 +40,7 @@
   border-top-left-radius: 10px;
   max-height: 500px;
   border: solid #c3cce8;
-  padding: 10px 0;
+  padding: 10px;
 }
 
 .show_user_container {
@@ -89,15 +89,22 @@
 
 .user_dates {
   font-size: small;
+  color: #566d96;
+  margin-left: 142px;
+  margin-top: -30px;
+  width: 400px;
 }
 
 .users_profile_separation {
   width: 875px;
+  margin-bottom:0;
 }
 
 .button-container {
   padding-top: 10px;
   text-align-last: center;
+  width: 200px;
+  margin-top: -90px;
 }
 
 .edit_profile_button {
@@ -123,7 +130,19 @@
 }
 
 .profile_post_separation {
-  width: 675px;
+  width: 875px;
   margin-left: -25px;
   margin-top: 20px;
+}
+
+.users-post-container {
+  height: fit-content;
+  min-height: 220px;
+}
+
+.no-user-posts {
+  text-align: center;
+  color: #566d96;
+  margin-top: 100px;
+  font-size: large;
 }

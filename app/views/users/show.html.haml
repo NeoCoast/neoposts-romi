@@ -6,31 +6,28 @@
       .container.show_user_exterior_container.justify-content-start
         .col-md-12
           .container.users_back_container
-            = link_to "Back", root_path, class: 'back_button'
+            = link_to "Back", :back, class: 'back_button'
           .container.show_user_container.justify-content-start
-            .container.user-information.d-flex
-              - if @user.profile_picture.attached?
-                = image_tag url_for(@user.profile_picture), class: 'user-picture', alt: 'User Image'
-              - else
-                = image_tag 'user_picture.jpg', class: 'user-picture', alt: 'Default Profile Image'
-              .container.user-information-text
-                .container.d-flex
-                  %p.user_name #{@user.first_name} #{@user.last_name}
-                  %p.user_nickname @#{@user.nickname}
-                .container.d-flex.user_dates
-                  %p.user_birthday Born #{@user.birthday.strftime("%m/%d/%Y")}
-                  %p Joined #{@user.created_at.strftime("%m/%d/%Y")}
+            .container.d-flex.flex-wrap
+              = render partial: 'partials/user', locals: { user: @user }
+              .container.d-flex.user_dates
+                %p.user_birthday Born #{@user.birthday.strftime("%m/%d/%Y")}
+                %p Joined #{@user.created_at.strftime("%m/%d/%Y")}
               - if @user == current_user
                 .container.align-content-center.button-container
                   = link_to "Edit Profile", edit_user_registration_path, class: 'edit_profile_button'
             %hr.users_profile_separation
-              .container.user-stats-content
-                %p.post-count #{@user.posts.count}
-                %p Posts
+            .container.user-stats-content
+              %p.post-count #{@user.posts.count}
+              %p Posts
             %hr.users_profile_separation
-            .container
+            .container.users-post-container
               .col-md-12
-                - @user.posts.each_with_index do |post, index|
-                  = render partial: 'partials/post', locals: { post: post }
-                  - unless index == @user.posts.size - 1
-                    %hr.profile_post_separation
+                - if @user.posts.any?
+                  - @user.posts.each_with_index do |post, index|
+                    = render partial: 'partials/post', locals: { post: post }
+                    - unless index == @user.posts.size - 1
+                      %hr.profile_post_separation
+                - else
+                  %p.no-user-posts No posts to show :(
+
