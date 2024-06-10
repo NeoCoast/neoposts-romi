@@ -16,12 +16,18 @@
               - if @user == current_user
                 .container.align-content-center.button-container
                   = link_to "Edit Profile", edit_user_registration_path, class: 'edit_profile_button'
+              - else
+                .container.align-content-center.button-container#follow_unfollow_container
+                  - if current_user.following?(@user)
+                    = render partial: 'partials/unfollow', locals: { user: @user, current_user: current_user }
+                  - else
+                    = render partial: 'partials/follow', locals: { user: @user }
             %hr.users_profile_separation
             .container.user-stats-content
               %p.post-count #{@user.posts.count}
               %p Posts
             %hr.users_profile_separation
-            .container.users-post-container
+            .container.users-post-containers
               .col-md-12
                 - if @user.posts.any?
                   - @user.posts.each_with_index do |post, index|

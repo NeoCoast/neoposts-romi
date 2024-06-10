@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   get 'users/:nickname', to: 'users#show', as: 'show_user', nickname: /[^\/]+/
   resources :users, only: [:index]
+
+  resources :relationships, only: [:create, :destroy]
 end
