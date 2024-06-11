@@ -4,7 +4,8 @@
     .container.show_post_exterior_container.justify-content-start
       .col-md-12
         .container.post_back_container
-          = link_to "Back", root_path, class: 'post_back_button'
+          = link_to "Back", :back, class: 'back_button'
+
         .container.show_post_container.justify-content-start
           .col-md-2
             - if @post.user.profile_picture.attached?

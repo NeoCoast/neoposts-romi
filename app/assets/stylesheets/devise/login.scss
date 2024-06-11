@@ -8,10 +8,41 @@
 
 .login_title {
   padding: 4%;
+  color: #566d96
+}
+
+.login-label {
+  margin-left: 60px;
+}
+
+.login-fields {
+  display: flex;
+  width: 400px;
+}
+
+.email-login-field {
+  width: 200px;
+  margin-left: 80px;
+}
+
+.password-login-field {
+  width: 200px;
+  margin-left: 50px;
+}
+
+.remember-me-field {
+  width: 300px;
+  padding-left: 70px;
+  padding-top: 10px;
+}
+
+.login-buttons-container {
+  width: 390px;
 }
 
 .login_button {
   padding: 5%;
+  padding-left: 120px;
 }
 
 .signup_alt_button {
@@ -29,4 +60,5 @@
 .login-alert{
   color: red;
   font-size: small;
+  margin-left: 45px;
 }

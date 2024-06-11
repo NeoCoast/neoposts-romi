@@ -72,3 +72,5 @@ gem 'lefthook', '~> 1.6', '>= 1.6.10'
 gem 'devise', '~> 4.9', '>= 4.9.4'
 
 gem 'image_processing', '>= 1.2'
+
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
