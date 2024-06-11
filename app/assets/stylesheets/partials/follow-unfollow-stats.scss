@@ -1,0 +1,32 @@
+#follow_unfollow_count .stat {
+  text-decoration: none;
+  color: #566d96;
+}
+
+#follow_unfollow_count .stat-count {
+  font-size: xx-large;
+  margin-bottom: 0;
+}
+
+#sidecard-stats-count .stat {
+  text-decoration: none;
+  color: #566d96;
+  display: flex;
+  margin-left: -12px;
+}
+
+#sidecard-stats-count .stat-count {
+  margin-right: 4px;
+}
+
+.hidden {
+  display: none;
+}
+
+#followers-count {
+  cursor: pointer;
+}
+
+#following-count {
+  cursor: pointer;
+}

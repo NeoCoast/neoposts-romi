@@ -1,0 +1,32 @@
+.following-list .user-profile-link {
+  text-decoration: none;
+}
+
+.following-list .user-picture {
+  border-radius: 50%;
+  border: solid 1px #c3cce8;
+}
+
+.following-list .user_name  {
+  margin: 0;
+  width: fit-content;
+  padding-left: 30px;
+}
+
+.following-list .user_nickname {
+  margin: 0;
+  padding-left: 30px;
+}
+
+.following-list .user-information-text {
+  padding: 25px 0 0 0;
+  height: 80px;
+}
+
+.following-list .user-information {
+  height: fit-content;
+}
+
+.following-list {
+  width: fit-content;
+}

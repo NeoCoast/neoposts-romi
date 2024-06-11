@@ -1,0 +1,4 @@
+.following-list.hidden#following-list
+  - user.following.each do |following_user|
+    = link_to show_user_path(following_user.nickname), class: "user-profile-link" do
+      = render partial: 'partials/user', locals: { user: following_user }
