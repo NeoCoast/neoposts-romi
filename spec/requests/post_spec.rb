@@ -35,11 +35,14 @@ RSpec.describe 'Posts', type: :request do
 
   describe 'GET index' do
     context 'when user is authenticated' do
-      let!(:user) { create(:user) }
-      let!(:posts) { create_list(:post, 6, user:) }
+      let!(:users) { create_list(:user, 3) }
+      let!(:posts_user0) { create_list(:post, 3, user: users[0]) }
+      let!(:posts_user1) { create_list(:post, 3, user: users[1]) }
+      let!(:posts_user2) { create_list(:post, 3, user: users[2]) }
 
       before do
-        sign_in user
+        sign_in users[0]
+        users[0].follow(users[1])
       end
 
       it 'returns HTTP success' do
@@ -49,14 +52,24 @@ RSpec.describe 'Posts', type: :request do
 
       it 'shows created posts' do
         get root_path
-        posts.each do |post|
+        posts_user1.each do |post|
           expect(response.body).to include(post.body)
         end
       end
 
-      it 'shows created posts ordered by the newest created' do
+      it 'shows followed user posts ordered by the newest created' do
         get root_path
-        expect(assigns(:posts)).to eq(posts.sort_by(&:published_at).reverse)
+        expect(assigns(:posts)).to eq(posts_user1.sort_by(&:published_at).reverse)
+      end
+
+      it 'doesn`t show not followed user posts' do
+        get root_path
+        expect(assigns(:posts)).not_to include(posts_user2)
+      end
+
+      it 'doesn`t show logged user posts' do
+        get root_path
+        expect(assigns(:posts)).not_to include(posts_user0)
       end
     end
 
