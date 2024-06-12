@@ -16,6 +16,10 @@
   border: solid #566d96;
   padding: 10px 20px;
   border-radius: 5px;
+
+  &:hover{
+    opacity: 0.8;
+  }
 }
 
 .no-users {
