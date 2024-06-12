@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.newest_first
+    @posts = current_user.following_posts.newest_first
   end
 
   def new
