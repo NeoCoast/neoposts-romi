@@ -1,0 +1,8 @@
+.container.stat#following-container{ data: { user_id: user.id } }
+  %p.stat-count#following-count= user.following.count
+  %p Following
+
+
+.container.stat#followers-container{ data: { user_id: user.id } }
+  %p.stat-count#followers-count= user.followers.count
+  %p Followers

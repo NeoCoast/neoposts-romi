@@ -2,7 +2,7 @@
   background-color: #ffffff; 
   border-radius: 10px;
   max-width: 200px; 
-  height: 330px;
+  height: 430px;
   border: solid #c3cce8;
   margin-left: 150px;
   margin-top: 40px;
@@ -52,4 +52,13 @@ hr {
   height: 100px;
   width: 100px;
   border-radius: 50%;
+}
+
+.stats-separation {
+  margin: 0 0 10px -25px;
+  width: 199px;
+}
+
+.posts-count {
+  color: #566d96;
 }

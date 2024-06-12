@@ -76,7 +76,8 @@
 .user_name {
   font-size:large;
   font-weight: bold;
-  margin: 5px 30px 5px 0;
+  margin: 5px 0 5px 0;
+  width: 150px;
 }
 
 .user_nickname {
@@ -84,7 +85,7 @@
 }
 
 .user_birthday {
-  margin-right: 30px;
+  width: 150px;
 }
 
 .user_dates {
@@ -127,12 +128,15 @@
 }
 
 .user-stats-content {
-  width: 200px;
-  margin-left: 80px;
+  width: 800px;
   text-align: center;
   color: #566d96;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 20px;
+}
+
+.post-count-container{
+  width: 310px;
 }
 
 .post-count {
@@ -156,4 +160,8 @@
   color: #566d96;
   margin-top: 100px;
   font-size: large;
+}
+
+.hidden {
+  display: none;
 }
