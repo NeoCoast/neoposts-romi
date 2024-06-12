@@ -10,6 +10,7 @@
   flex-direction: column;
   width: 700px;
   padding-bottom: 10px;
+  margin-top: 3%;
 }
 
 .edit-user-exterior-container {
@@ -22,6 +23,8 @@
   display: flex;
   flex-direction: column;
   width: 700px;
+
+  margin-bottom: 3%;
 }
 
 .edit-title {
@@ -31,7 +34,7 @@
 }
 
 .edit-user-form {
-  margin-left: 10%;
+  margin-left: 15%;
 }
 
 .edit-label {
@@ -61,6 +64,13 @@
   color : transparent; 
 }
 
+.change-password-explain {
+  color: #566d96;
+  font-size: small;
+  font-style: italic;
+  margin-bottom: 0;
+}
+
 .confirm-password-error {
   margin-left: 10px;
 }
@@ -78,4 +88,12 @@
   height: 40px;
   border-radius: 5px;
   margin-top: 20px;
+
+  &:hover{
+    opacity: 0.8;
+  }
+}
+
+.new-password-fields {
+  padding-top: 12px;
 }

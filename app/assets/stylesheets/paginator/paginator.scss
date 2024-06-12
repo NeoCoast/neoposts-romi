@@ -12,10 +12,32 @@
   padding: 0;
   color: #566d96;
   margin: 20px 3px;
+  cursor: pointer;
 }
 
 .next-last-page,
 .previous-first-page {
   margin: 20px 3px;
   width: 120px;
+}
+
+.pages {
+  text-decoration: none;
+  color: #566d96;
+}
+
+.current {
+  color: white;
+  font-weight: 700;
+}
+
+.current-page {
+  background-color: #566d96;
+  opacity: 0.3;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  padding: 0;
+  border: solid #05193c;
+  margin: 20px 3px;
 }
