@@ -1,0 +1,11 @@
+.comment
+  - if comment.user.profile_picture.attached?
+    = image_tag url_for(comment.user.profile_picture), alt: 'User Image', class: 'comment-user-image'
+  - else
+    = image_tag 'user_picture.jpg', alt: 'Default Profile Image', class: 'comment-user-image'
+  .container
+    %p= "#{comment.user.first_name} #{comment.user.last_name} @#{comment.user.nickname}"
+    %p= comment.content
+    .replies
+      - comment.comments.order(created_at: :asc).each do |reply|
+        = render 'comments/show-comment', comment: reply

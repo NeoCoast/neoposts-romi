@@ -25,6 +25,8 @@ class User < ApplicationRecord
 
   has_many :following_posts, through: :following, source: :posts
 
+  has_many :comments, dependent: :destroy
+
   paginates_per 5
 
   def follow(other_user)
