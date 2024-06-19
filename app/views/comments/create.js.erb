@@ -1,0 +1,14 @@
+
+<% if @commentable.is_a?(Post) %>
+  $("#comments-count").text("<%= j @commentable.comments.count %> Comments");
+<% end %>
+
+<% if @comment.commentable_type == 'Post' %>
+  $("#comments").append("<%= j render(partial: 'comments/comment', locals: { comment: @comment }) %>");
+  $("#postcomment-form-<%= @comment.commentable_id %>").addClass("hidden");
+  $("#postcomment-form-<%= @comment.commentable_id %> textarea").val('');
+<% else %>
+  $("#replies-<%= @comment.commentable_id %>").append("<%= j render(partial: 'comments/comment', locals: { comment: @comment }) %>");
+  $("#commentcomment-form-<%= @comment.commentable_id %>").addClass("hidden");
+  $("#commentcomment-form-<%= @comment.commentable_id %> textarea").val('');
+<% end %>

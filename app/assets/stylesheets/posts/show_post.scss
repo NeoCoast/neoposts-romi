@@ -23,12 +23,11 @@
 .show_post_container {
   display: flex;
   background-color: #ffffff; 
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
   height: fit-content;
   border-right: solid #c3cce8;
   border-left: solid #c3cce8;
   border-bottom: solid #c3cce8;
+  padding-bottom: 10px;
 }
 
 .post_back_container {
@@ -84,4 +83,18 @@
   width: 80px;
   border-radius: 100%;
   margin-left: 20px;
+}
+
+.comments-title {
+  padding-top: 20px;
+  color: #566d96;
+}
+
+.comments-exterior-container {
+  background: white;
+  border-left: solid #c3cce8;
+  border-right: solid #c3cce8;
+  border-bottom: solid #c3cce8;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }

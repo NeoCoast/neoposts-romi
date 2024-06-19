@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index]
 
   resources :relationships, only: [:create, :destroy]
+
+  resources :comments, only: [:create]
 end

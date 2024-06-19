@@ -21,3 +21,14 @@
                 %p= @post.body
                 - if @post.image.attached?
                   = image_tag url_for(@post.image), alt: 'Post Image', class: 'post-image'
+            %i.bi.bi-chat-right.toggle-postcomment-form{id: "toggle-postcomment-form-#{@post.id}", data: { post_id: @post.id }}
+            .container.new-post-comment.hidden{id: "postcomment-form-#{@post.id}"}
+              = render 'comments/comment-form', commentable: @post, css_class: 'new-post-comment'
+        .container.comments-exterior-container
+          .container
+          %h5.comments-title#comments-count= "#{@post.comments.count} Comments"
+          .container#comments
+            - if @post.comments.any?
+              - @post.comments.order(created_at: :asc).each do |comment|
+                = render partial: 'comments/comment', locals: { comment: comment }
+

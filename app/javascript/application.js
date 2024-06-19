@@ -42,5 +42,20 @@ document.addEventListener('DOMContentLoaded', function() {
       followersClicked = false;
     }
   });
+
+  $(document).on('click', '.toggle-postcomment-form', function() {
+    const formId = `#postcomment-form-${this.dataset.postId}`;
+    document.querySelector(formId).classList.toggle('hidden');
+  })
+
+  $(document).on('click', '.toggle-comments', function() {
+    var postId = this.dataset.postId;
+    document.querySelector('#comments-' + postId).classList.toggle('hidden');
+  }) 
+
+  $(document).on('click', '.toggle-commentscomment-form', function () {
+    const formId = `#commentcomment-form-${this.dataset.commentId}`;
+      document.querySelector(formId).classList.toggle('hidden');
+  })
 });
 
