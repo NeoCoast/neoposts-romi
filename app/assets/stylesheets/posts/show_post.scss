@@ -98,3 +98,11 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+.post-icons-container {
+  padding-left: 0;
+
+  .toggle-postcomment-form {
+    padding: 1px 0 0 5px;
+  }
+}

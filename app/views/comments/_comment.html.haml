@@ -6,7 +6,9 @@
   .container
     %p= "#{comment.user.first_name} #{comment.user.last_name} @#{comment.user.nickname}"
     %p= comment.content
-    %i.bi.bi-chat-right.toggle-commentscomment-form{id: "toggle-commentcomment-form-#{comment.id}", data: { comment_id: comment.id }}
+    .container.d-flex.comment-icons-container
+      = render partial: 'partials/like-unlike-comments', locals: {comment: comment, current_user: current_user}
+      %i.bi.bi-chat-right.toggle-commentscomment-form{id: "toggle-commentcomment-form-#{comment.id}", data: { comment_id: comment.id }}
     .container.new-comment-comment.hidden{id: "commentcomment-form-#{comment.id}"}
       = render 'comments/comment-form', commentable: comment, css_class: 'new-comment-comment'
     .replies{id: "replies-#{comment.id}"}
