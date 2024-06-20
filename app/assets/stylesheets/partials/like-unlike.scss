@@ -1,0 +1,19 @@
+.like_button {
+  border: none;
+  background: none;
+  color: #566d96;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.unlike_button {
+  border: none;
+  background: none;
+  color: #566d96;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

@@ -6,6 +6,8 @@
   .container
     %p= "#{comment.user.first_name} #{comment.user.last_name} @#{comment.user.nickname}"
     %p= comment.content
+    .container.d-flex.comment-icons-container
+      = render partial: 'partials/like-unlike-comments', locals: {comment: comment, current_user: current_user}
     .replies
       - comment.comments.order(created_at: :asc).each do |reply|
         = render 'comments/show-comment', comment: reply

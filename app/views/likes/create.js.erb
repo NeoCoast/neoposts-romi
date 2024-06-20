@@ -1,0 +1,2 @@
+$('#like_unlike_container-<%= @likable.id %>').html('<%= j(render partial: "partials/unlike", locals: { likable: @likable, current_user: current_user }) %>');
+$('#likes-container-<%= @likable.id %>').html('<%= j(render partial: "partials/like-stats", locals: { likable: @likable }) %>');

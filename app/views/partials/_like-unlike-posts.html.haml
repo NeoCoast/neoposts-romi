@@ -1,0 +1,6 @@
+.like-unlike-container{id: "like_unlike_container-#{post.id}"}
+  - if current_user.liked_posts?(post)
+    = render partial: 'partials/unlike', locals: { likable: post, current_user: current_user}
+  - else
+    = render partial: 'partials/like', locals: { likable: post }
+= render partial: 'partials/like-stats', locals: { likable: post }
