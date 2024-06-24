@@ -165,4 +165,66 @@ RSpec.describe 'Posts', type: :request do
       end
     end
   end
+
+  describe 'DESTROY post' do
+    context 'when user is authenticated' do
+      let!(:users) { create_list(:user, 3) }
+      let!(:post) { create(:post, :liked_and_commented, user: users[0]) }
+      let!(:post2) { create(:post, :liked_and_commented, user: users[1]) }
+
+      before do
+        sign_in users[0]
+      end
+
+      context 'user tries to delete his post' do
+        it 'deletes the post' do
+          expect do
+            delete post_path(post.id), params: { id: post.id }
+          end.to change(Post, :count).by(-1)
+        end
+
+        it 'deletes associated comments' do
+          expect do
+            delete post_path(post.id), params: { id: post.id }
+          end.to change(Comment, :count).by(-2)
+        end
+
+        it 'deletes associated likes' do
+          expect do
+            delete post_path(post.id), params: { id: post.id }
+          end.to change(Like, :count).by(-1)
+        end
+
+        it 'redirects to the root path' do
+          delete post_path(post.id), params: { id: post.id }
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context 'user tries to delete other user post' do
+        it 'does not delete the post' do
+          expect do
+            delete post_path(post2.id), params: { id: post2.id }
+          end.not_to change(Post, :count)
+        end
+
+        it 'does not delete associated comments' do
+          expect do
+            delete post_path(post2.id), params: { id: post2.id }
+          end.not_to change(Comment, :count)
+        end
+
+        it 'does not delete associated likes' do
+          expect do
+            delete post_path(post2.id), params: { id: post2.id }
+          end.not_to change(Like, :count)
+        end
+
+        it 'redirects to root path' do
+          delete post_path(post2.id), params: { id: post2.id }
+          expect(response).to redirect_to(root_path)
+        end
+      end
+    end
+  end
 end

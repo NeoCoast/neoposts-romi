@@ -103,6 +103,65 @@
   padding-left: 0;
 
   .toggle-postcomment-form {
-    padding: 1px 0 0 5px;
+    padding: 2px 0 0 5px;
   }
 }
+
+.delete-post-button-container {
+  padding-left: 87%;
+}
+
+.delete-post-button {
+  border: none;
+  background: none;
+  color: #566d96;
+  height: 25px;
+  width: 20px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.modal-content{
+  color: #566d96;
+}
+
+.close-modal {
+  background: white;
+  border: solid 1px #566d96;
+  border-radius: 3px;
+  color: #566d96;
+}
+
+.modal-body {
+  padding-bottom: 0;
+}
+
+.delete-post-modal-button {
+  background-color: #566d96;
+  color: white;
+  width: 100px;
+  border-radius: 5px; 
+  border: solid #566d96;
+  padding: 5px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+
+  &:hover{
+    opacity: 0.8;
+  }
+}
+
+.cancel-delete-post-modal-button {
+  border: solid #566d96;
+  padding: 5px;
+  border-radius: 5px;
+  background: white;
+  width: 80px;
+  color: #566d96;
+
+  &:hover{
+    opacity: 0.8;
+  }
+}
+
