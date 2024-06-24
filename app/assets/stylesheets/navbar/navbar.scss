@@ -32,3 +32,27 @@
     opacity: 0.8;
   }
 }
+
+.search-form {
+  background: white;
+  border-radius: 5px;
+  height: 30px;
+  width: 40vw;
+}
+
+.search-field {
+  border: none;
+  width: 92%;
+  outline: none;
+  color: #566d96;
+}
+
+.search-button {
+  background: white;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding-left: 15px;
+  padding-right: 10px;
+  color: #566d96;
+}

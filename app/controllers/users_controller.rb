@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.order(:first_name, :last_name, :nickname).page params[:page]
+    sanitized_params = params[:search].to_s.gsub('@', '').strip
+    @users = User.search_by_param(sanitized_params).order(:first_name, :last_name, :nickname).page(params[:page])
   end
 end

@@ -58,4 +58,11 @@ class User < ApplicationRecord
   def liked_comments?(likable)
     liked_comments.include?(likable)
   end
+
+  scope :search_by_param, lambda { |search_param|
+    if search_param.present?
+      where('nickname ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?',
+            "%#{search_param}%", "%#{search_param}%", "%#{search_param}%")
+    end
+  }
 end
