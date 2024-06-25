@@ -4,7 +4,9 @@
 //= require jquery3
 //= require popper
 //= require_tree .
+//= require bootstrap
 
+import 'bootstrap';
 import Rails from '@rails/ujs'
 import './add_jquery';
 Rails.start();

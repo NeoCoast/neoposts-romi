@@ -22,8 +22,12 @@
                 - if @post.image.attached?
                   = image_tag url_for(@post.image), alt: 'Post Image', class: 'post-image'
             .container.d-flex.post-icons-container
-              = render partial: 'partials/like-unlike-posts', locals: { post: @post, curent_user: current_user }
+              = render partial: 'partials/like-unlike-posts', locals: { post: @post, current_user: current_user }
               %i.bi.bi-chat-right.toggle-postcomment-form{id: "toggle-postcomment-form-#{@post.id}", data: { post_id: @post.id }}
+              .container.delete-post-button-container
+                - if @post.user.id == current_user.id
+                  %button.delete-post-button{ data: { bs: { toggle: 'modal', target: '#deleteModal' } } }
+                    %i.bi.bi-trash3
             .container.new-post-comment.hidden{id: "postcomment-form-#{@post.id}"}
               = render 'comments/comment-form', commentable: @post, css_class: 'new-post-comment'
         .container.comments-exterior-container
@@ -33,3 +37,17 @@
             - if @post.comments.any?
               - @post.comments.order(created_at: :asc).each do |comment|
                 = render partial: 'comments/comment', locals: { comment: comment }
+
+.modal.fade{ id: "deleteModal", tabindex: "-1", role: "dialog", "aria-labelledby" => "deleteModalLabel", "aria-hidden" => "true" }
+  .modal-dialog{ role: "document" }
+    .modal-content
+      .modal-header.justify-content-between
+        %h5#deleteModalLabel.modal-title Post delete confirmation
+        %button.close.close-modal{ type: "button", data: {bs: {dismiss: "modal" } }, "aria-label" => "Close" }
+          %span{ "aria-hidden" => "true" } &times;
+      .modal-body
+        %p Are you sure you want to delete this post? This action can't be reverted.
+      .modal-footer
+        = button_to 'Delete', post_path(@post), method: :delete, class: 'delete-post-modal-button'
+        %button.cancel-delete-post-modal-button{ type: "button", data: {bs: {dismiss: "modal" } } } Cancel
+
