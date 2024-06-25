@@ -23,17 +23,32 @@
                   - else
                     = render partial: 'partials/follow', locals: { user: @user }
             %hr.users_profile_separation
-            .container.user-stats-content
-              %p.post-count #{@user.posts.count}
-              %p Posts
+            .container.d-flex.user-stats-content
+              .container.post-count-container
+                %p.post-count #{@user.posts.count}
+                %p Posts
+              .container.d-flex#follow_unfollow_count
+                = render partial: 'partials/follow-unfollow-stats', locals: { user: @user }
             %hr.users_profile_separation
             .container.users-post-containers
               .col-md-12
-                - if @user.posts.any?
-                  - @user.posts.each_with_index do |post, index|
-                    = render partial: 'partials/post', locals: { post: post }
-                    - unless index == @user.posts.size - 1
-                      %hr.profile_post_separation
-                - else
-                  %p.no-user-posts No posts to show :(
+                #users-posts
+                  - if @user.posts.any?
+                    - @user.posts.each_with_index do |post, index|
+                      = render partial: 'partials/post', locals: { post: post }
+                      .container.d-flex.users-posts-icons-container
+                        = render partial: 'partials/like-unlike-posts', locals: { post: post, curent_user: current_user }
+                        %i.bi.bi-chat-right.toggle-comments{id: "toggle-postcomment-#{post.id}", data: { post_id: post.id }}
+                      .container.hidden{id: "comments-#{post.id}", data: { post_id: post.id }}
+                        - if post.comments.any?
+                          - post.comments.order(created_at: :asc).each do |comment|
+                            = render partial: 'comments/show-comment', locals: { comment: comment }
+                        - else
+                          %p.no-comments No comments yet
+                      - unless index == @user.posts.size - 1
+                        %hr.profile_post_separation
+                  - else
+                    %p.no-user-posts No posts to show :(
+                = render partial: 'partials/following-list', locals: { user: @user }
+                = render partial: 'partials/followers-list', locals: { user: @user }
 

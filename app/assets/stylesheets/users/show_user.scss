@@ -27,6 +27,10 @@
   text-decoration: none;
   text-align: center;
   margin: 0 20px;
+
+  &:hover{
+    opacity: 0.8;
+  }
 }
 
 .show_user_exterior_container {
@@ -76,7 +80,8 @@
 .user_name {
   font-size:large;
   font-weight: bold;
-  margin: 5px 30px 5px 0;
+  margin: 5px 0 5px 0;
+  width: 150px;
 }
 
 .user_nickname {
@@ -84,7 +89,7 @@
 }
 
 .user_birthday {
-  margin-right: 30px;
+  width: 150px;
 }
 
 .user_dates {
@@ -113,26 +118,45 @@
   border: solid #566d96;
   padding: 10px 20px;
   border-radius: 5px;
+  
+  &:hover{
+    opacity: 0.8;
+  }
 }
 
 .follow_button,
 .unfollow_button {
   text-decoration: none;
-  color: #566d96;
   border: solid #566d96;
   padding: 10px 20px;
   border-radius: 5px;
   background: white;
   width: 130px;
+
+  &:hover{
+    opacity: 0.8;
+  }
+}
+
+.follow_button {
+  background: #566d96;
+  color: white
+}
+
+.unfollow_button {
+  color: #566d96;
 }
 
 .user-stats-content {
-  width: 200px;
-  margin-left: 80px;
+  width: 800px;
   text-align: center;
   color: #566d96;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 20px;
+}
+
+.post-count-container{
+  width: 310px;
 }
 
 .post-count {
@@ -146,14 +170,31 @@
   margin-top: 20px;
 }
 
-.users-post-container {
+.users-post-containers {
   height: fit-content;
-  min-height: 220px;
 }
 
 .no-user-posts {
   text-align: center;
   color: #566d96;
-  margin-top: 100px;
   font-size: large;
+  height: 120px;
+  padding-top: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+#users-posts {
+  margin-bottom: 10px;
+}
+
+.users-posts-icons-container {
+  margin-left: 120px;
+
+  .toggle-comments {
+    margin-left: 5px;
+    padding-top: 1px;
+  }
 }

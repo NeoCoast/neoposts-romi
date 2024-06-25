@@ -3,7 +3,12 @@
     .navbar-header
       = link_to root_path do
         = image_tag 'logo.png', alt: 'Logo'
-    .container.list-users-button
-      - if current_user
+    - if current_user
+      .navbar-form
+        = form_with(url: users_path, method: :get, local: true, class: "search-form") do |f|
+          .form-group.d-flex.search-form
+            = button_tag type: 'submit', class: 'search-button' do
+              %i.bi.bi-search
+            = f.text_field :search, class: "search-field", value: params[:search]
+      .container.list-users-button
         = link_to "List users", users_path, class: 'list-users-link'
-      

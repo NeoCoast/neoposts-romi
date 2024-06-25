@@ -5,7 +5,7 @@
       = prev_page_tag unless current_page.first?
     - each_page do |page|
       - if page.display_tag?
-        .container.page_number
+        .container{ class: page.current? ? 'current-page' : 'page_number' }
           = page_tag page
       - elsif !page.was_truncated?
         = gap_tag

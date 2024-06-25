@@ -23,6 +23,12 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships
 
+  has_many :following_posts, through: :following, source: :posts
+
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :likable, source_type: 'Post'
+  has_many :liked_comments, through: :likes, source: :likable, source_type: 'Comment'
+
   paginates_per 5
 
   def follow(other_user)
@@ -36,4 +42,27 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  def like(likable)
+    likes.create(likable:)
+  end
+
+  def unlike(likable)
+    likes.find_by(likable:)&.destroy
+  end
+
+  def liked_posts?(likable)
+    liked_posts.include?(likable)
+  end
+
+  def liked_comments?(likable)
+    liked_comments.include?(likable)
+  end
+
+  scope :search_by_param, lambda { |search_param|
+    if search_param.present?
+      where('nickname ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?',
+            "%#{search_param}%", "%#{search_param}%", "%#{search_param}%")
+    end
+  }
 end

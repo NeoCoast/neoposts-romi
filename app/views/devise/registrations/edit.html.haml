@@ -6,7 +6,7 @@
       Edit #{resource_name.to_s.humanize}
     .container.edit-user-form
       = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-        .field.d-flex.row.mb-3
+        .field.d-flex.row.mb-4
           .col-md-4
             = f.label :email, class: 'edit-label'
           .col-md-6
@@ -15,38 +15,38 @@
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
           %div
             Currently waiting confirmation for: #{resource.unconfirmed_email}
-        .field.d-flex.row.mb-3
+        .field.d-flex.row.mb-4
           .col-md-4
             = f.label :nickname, class: 'edit-label'
           .col-md-6
             = f.text_field :nickname, class: 'edit-field'
           = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:nickname], type: 'Nickname' }
-        .field.d-flex.row.mb-3
+        .field.d-flex.row.mb-4
           .col-md-4
             = f.label :first_name, class: 'edit-label'
           .col-md-6
             = f.text_field :first_name, class: 'edit-field'
-        .field.d-flex.row.mb-3
+        .field.d-flex.row.mb-4
           .col-md-4
             = f.label :last_name, class: 'edit-label'
           .col-md-6
             = f.text_field :last_name, class: 'edit-field'
-        .field.d-flex.row.mb-3
+        .field.d-flex.row.mb-4
           .col-md-4
             = f.label :birthday, class: 'edit-label'
           .col-md-6
             = f.date_field :birthday
-        .field.d-flex.row.mb-3
+        .field.d-flex.row.mb-4
           .col-md-4
             =f.label :profile_picture, class: 'edit-label'
           .col-md-6
             = f.file_field :profile_picture, accept: 'image/png,image/jpeg'
         .field
           = f.label :password, class: 'edit-label'
-          %i.edit-label (leave blank if you don't want to change it)
-          .row
+          %i.edit-label.change-password-explain (leave blank if you don't want to change it)
+          .row.new-password-fields
             .col-md-10.d-flex
-              = f.password_field :password, autocomplete: "password", class: 'edit-field'
+              = f.password_field :password, autocomplete: "password", class: 'edit-field', placeholder: "New password"
               = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm password", class: 'edit-field confirm-password'
           .row
             .col-md-9
@@ -54,9 +54,10 @@
               = render partial: 'devise/shared/signup_error_messages', locals: { errors: resource.errors[:password_confirmation], type: 'Password confirmation' }
         .field.current-password-box
           = f.label :current_password, class: 'edit-label'
-          %i.edit-label (we need your current password to confirm your changes)
+          %i.edit-label
+          %p.change-password-explain (we need your current password to confirm your changes)
           .container.current-password-field
-            .row
+            .row.new-password-fields
               .col-md-4
                 = f.password_field :current_password, autocomplete: "current-password", class: 'edit-field'
             .row

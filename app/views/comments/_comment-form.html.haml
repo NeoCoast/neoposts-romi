@@ -1,0 +1,8 @@
+.container{ class: css_class }
+  = form_for Comment.new, url: comments_path, remote: true do |f|
+    .form-group
+      = f.hidden_field :commentable_type, value: commentable.class.name
+      = f.hidden_field :commentable_id, value: commentable.id
+      = f.label :content, 'New comment'
+      = f.text_area :content, class: 'form-control'
+    = f.submit 'Submit', class: 'comment_button'

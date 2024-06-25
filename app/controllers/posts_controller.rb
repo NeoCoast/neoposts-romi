@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.newest_first
+    @posts = current_user.following_posts.newest_first
   end
 
   def new
@@ -21,6 +21,12 @@ class PostsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @post = current_user.posts.find(params[:id])
+    @post.destroy
+    redirect_to root_path
   end
 
   private

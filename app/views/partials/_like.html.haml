@@ -1,0 +1,5 @@
+= form_for(current_user.likes.build, remote: true) do |f|
+  = hidden_field_tag :likable_id, likable.id
+  = hidden_field_tag :likable_type, likable.class.name
+  = button_tag type: 'submit', class: 'like_button' do
+    %i.bi.bi-heart

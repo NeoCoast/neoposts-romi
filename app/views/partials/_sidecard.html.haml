@@ -10,5 +10,12 @@
       = link_to "@#{current_user.nickname}", show_user_path(current_user.nickname), class: 'nickname_paragraph sidecard-item'
       = link_to "New Post", new_post_path, class: 'create_post_button'
       %hr
-  .containter
+  .container#sidecard-stats-count
+    -if current_user.posts.count != 1
+      %p.posts-count #{current_user.posts.count} Posts
+    - else
+      %p.posts-count #{current_user.posts.count} Post
+    = render partial: 'partials/follow-unfollow-stats', locals: { user: current_user }
+    %hr.stats-separation
+  .container
     = button_to "Sign out", destroy_user_session_path, method: :delete, class: 'sign-out'

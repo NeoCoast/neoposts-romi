@@ -115,21 +115,125 @@ RSpec.describe 'Users', type: :request do
         sign_in user
       end
 
-      it 'returns HTTP success' do
-        get users_path
-        expect(response).to be_successful
+      context 'searching for all users' do
+        it 'returns HTTP success' do
+          get users_path
+          expect(response).to be_successful
+        end
+
+        it 'shows user list' do
+          total_pages = User.page.total_pages
+          (1..total_pages).each do |page|
+            get users_path, params: { page: }
+            users_on_page = User.order(:first_name).page(page).per(User.default_per_page)
+            users_on_page.each do |user|
+              expect(response.body).to include(user.nickname)
+              expect(response.body).to include(user.first_name)
+              expect(response.body).to include(user.last_name)
+            end
+          end
+        end
       end
 
-      it 'shows user list' do
-        total_pages = User.page.total_pages
-        (1..total_pages).each do |page|
-          get users_path, params: { page: }
-          users_on_page = User.order(:first_name).page(page).per(User.default_per_page)
-          users_on_page.each do |user|
-            expect(response.body).to include(user.nickname)
-            expect(response.body).to include(user.first_name)
-            expect(response.body).to include(user.last_name)
-          end
+      context 'searching for a user by nickname' do
+        it 'search param with @ shows user' do
+          get users_path, params: { search: "@#{users[2].nickname}" }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+
+        it 'search param with trailing spaces shows user' do
+          get users_path, params: { search: "  #{users[2].nickname}  " }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+
+        it 'search param just nickname shows user' do
+          get users_path, params: { search: users[2].nickname.to_s }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+
+        it 'search param nickname capitalized shows user' do
+          get users_path, params: { search: users[2].nickname.capitalize!.to_s }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+      end
+
+      context 'searching for a user by firstname' do
+        it 'search param with @ shows user' do
+          get users_path, params: { search: "@#{users[2].first_name}" }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+
+        it 'search param with trailing spaces shows user' do
+          get users_path, params: { search: "  #{users[2].first_name}  " }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+
+        it 'search param just firstname shows user' do
+          get users_path, params: { search: users[2].first_name.to_s }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+
+        it 'search param firstname capitalized shows user' do
+          get users_path, params: { search: users[2].first_name.capitalize!.to_s }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+      end
+
+      context 'searching for a user by lastname' do
+        it 'search param with @ shows user' do
+          get users_path, params: { search: "@#{users[2].last_name}" }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+
+        it 'search param with trailing spaces shows user' do
+          get users_path, params: { search: "  #{users[2].last_name}  " }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+
+        it 'search param just lastname shows user' do
+          get users_path, params: { search: users[2].last_name.to_s }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
+        end
+
+        it 'search param lastname capitalized shows user' do
+          get users_path, params: { search: users[2].last_name.capitalize!.to_s }
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include(user.nickname)
+          expect(response.body).to include(user.first_name)
+          expect(response.body).to include(user.last_name)
         end
       end
     end
