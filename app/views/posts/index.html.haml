@@ -9,6 +9,8 @@
             .container.d-flex.posts-icons-container
               = render partial: 'partials/like-unlike-posts', locals: { post: post, curent_user: current_user }
               %i.bi.bi-chat-right.toggle-comments{id: "toggle-postcomment-#{post.id}", data: { post_id: post.id }}
+              .container.comment-count-container
+                %p.comments-title.comment-count#comments-count= "#{post.comments.count}"
             .container.hidden{id: "comments-#{post.id}", data: { post_id: post.id }}
               - if post.comments.any?
                 - post.comments.order(created_at: :asc).each do |comment|

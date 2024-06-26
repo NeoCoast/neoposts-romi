@@ -12,38 +12,35 @@ import './add_jquery';
 Rails.start();
 
 document.addEventListener('DOMContentLoaded', function() {
-    var followingClicked = false;
-    var followersClicked = false;
-  
-    document.getElementById('following-count').addEventListener('click', function() {
-      if (!followingClicked) {
-        document.querySelector('.following-list').classList.remove('hidden');
-        document.querySelector('.followers-list').classList.add('hidden');
-        document.getElementById('users-posts').classList.add('hidden');
-        followingClicked = true;
-        followersClicked = false;
-      } else {
-        document.querySelector('.following-list').classList.add('hidden');
-        document.querySelector('.followers-list').classList.add('hidden');
-        document.getElementById('users-posts').classList.remove('hidden');
-        followingClicked = false;
-      }
-    });
+  $('#followers-list').addClass('hidden');
+  $('#following-list').addClass('hidden');
 
-  document.getElementById('followers-count').addEventListener('click', function() {
-    if (!followersClicked) {
-      document.querySelector('.followers-list').classList.remove('hidden');
-      document.querySelector('.following-list').classList.add('hidden');
-      document.getElementById('users-posts').classList.add('hidden');
-      followersClicked = true;
-      followingClicked = false;
-    } else {
-      document.querySelector('.followers-list').classList.add('hidden');
-      document.querySelector('.following-list').classList.add('hidden');
-      document.getElementById('users-posts').classList.remove('hidden');
-      followersClicked = false;
-    }
+  $(document).on('click', '#post-count', function() {
+    togglePanel('#users-posts', '.post-count-container');
   });
+  
+  $(document).on('click', '#following-count', function() {
+    togglePanel('#following-list', '#following-container');
+  });
+  
+  $(document).on('click', '#followers-count', function() {
+    togglePanel('#followers-list', '#followers-container');
+  });
+  
+  function togglePanel(panelToShow, containerToUnderline) {
+    var usersPostsShown = !$('#users-posts').hasClass('hidden');
+  
+    if (panelToShow === '#users-posts' && usersPostsShown) {
+      return;
+    }
+
+    $('#users-posts').removeClass('hidden');
+    $('.panel').addClass('hidden');
+    $(panelToShow).removeClass('hidden');
+  
+    $('.container').removeClass('underlined');
+    $(containerToUnderline).addClass('underlined');
+  }
 
   $(document).on('click', '.toggle-postcomment-form', function() {
     const formId = `#postcomment-form-${this.dataset.postId}`;
