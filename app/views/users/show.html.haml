@@ -24,21 +24,23 @@
                     = render partial: 'partials/follow', locals: { user: @user }
             %hr.users_profile_separation
             .container.d-flex.user-stats-content
-              .container.post-count-container
-                %p.post-count #{@user.posts.count}
+              .container.post-count-container.underlined
+                %p.post-count#post-count #{@user.posts.count}
                 %p Posts
               .container.d-flex#follow_unfollow_count
                 = render partial: 'partials/follow-unfollow-stats', locals: { user: @user }
             %hr.users_profile_separation
             .container.users-post-containers
               .col-md-12
-                #users-posts
+                .panel#users-posts
                   - if @user.posts.any?
                     - @user.posts.each_with_index do |post, index|
                       = render partial: 'partials/post', locals: { post: post }
                       .container.d-flex.users-posts-icons-container
                         = render partial: 'partials/like-unlike-posts', locals: { post: post, curent_user: current_user }
                         %i.bi.bi-chat-right.toggle-comments{id: "toggle-postcomment-#{post.id}", data: { post_id: post.id }}
+                        .container.comment-count-container
+                          %p.comments-title.comment-count#comments-count= "#{post.comments.count}"
                       .container.hidden{id: "comments-#{post.id}", data: { post_id: post.id }}
                         - if post.comments.any?
                           - post.comments.order(created_at: :asc).each do |comment|
@@ -49,6 +51,8 @@
                         %hr.profile_post_separation
                   - else
                     %p.no-user-posts No posts to show :(
-                = render partial: 'partials/following-list', locals: { user: @user }
-                = render partial: 'partials/followers-list', locals: { user: @user }
+                .container#followers-following-lists
+                  = render partial: 'partials/following-list', locals: { user: @user }
+                .container#followers-following-lists2
+                  = render partial: 'partials/followers-list', locals: { user: @user }
 

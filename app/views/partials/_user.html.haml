@@ -1,9 +1,10 @@
-.container.user-information.d-flex
-  - if user.profile_picture.attached?
-    = image_tag url_for(user.profile_picture), class: 'user-picture', alt: 'User Image'
-  - else
-    = image_tag 'user_picture.jpg', class: 'user-picture', alt: 'Default Profile Image'
-  .container.user-information-text
-    .container.d-flex
-      %p.user_name #{user.first_name} #{user.last_name}
-      %p.user_nickname @#{user.nickname}
+= link_to show_user_path(user.nickname), class: "user-profile-link", id: "user-profile-following-list" do
+  .container.user-information.d-flex
+    - if user.profile_picture.attached?
+      = image_tag url_for(user.profile_picture), class: 'user-picture', alt: 'User Image'
+    - else
+      = image_tag 'user_picture.jpg', class: 'user-picture', alt: 'Default Profile Image'
+    .container.user-information-text
+      .container.d-flex
+        %p.user_name #{user.first_name} #{user.last_name}
+        %p.user_nickname @#{user.nickname}
