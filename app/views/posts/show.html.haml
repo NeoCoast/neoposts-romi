@@ -32,7 +32,10 @@
               = render 'comments/comment-form', commentable: @post, css_class: 'new-post-comment'
         .container.comments-exterior-container
           .container
-          %h5.comments-title#comments-count= "#{@post.comments.count} Comments"
+          - if @post.comments.count == 1
+            %h5.comments-title#comments-count= "#{@post.comments.count} Comment"
+          - else
+            %h5.comments-title#comments-count= "#{@post.comments.count} Comments"
           .container#comments
             - if @post.comments.any?
               - @post.comments.order(created_at: :asc).each do |comment|

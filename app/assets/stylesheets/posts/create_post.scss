@@ -114,6 +114,11 @@
   color: #566d96;
   padding-top: 20px;
   font-size: small;
-  text-decoration: underline;
   padding-left: 15px;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
