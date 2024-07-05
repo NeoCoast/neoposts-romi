@@ -6,7 +6,12 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = current_user.following_posts.newest_first
+    @posts = current_user.following_posts.order_by_param(params[:sort])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
