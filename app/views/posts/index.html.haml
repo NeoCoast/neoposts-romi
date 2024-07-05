@@ -2,14 +2,12 @@
   .row
     .index-sidecard
       = render 'partials/sidecard'
+      .filters#filter-posts-by
+        = render 'partials/filter-posts'
     .container.exterior_container
-      .dropdown.order-selector-button
-        %a.order-selector.dropdown-toggle{ role: "button", "data-bs-toggle": "dropdown", aria: { expanded: "false" } } Order by
-        %ul.dropdown-menu
-          %li= link_to 'Newest', root_path(sort: 'newest_first'), remote: true, class: 'dropdown-item'
-          %li= link_to 'Most Liked', root_path(sort: 'most_liked'), remote: true, class: 'dropdown-item'
-          %li= link_to 'Trending', root_path(sort: 'trending'), remote: true, class: 'dropdown-item'
+      #sort-posts-by.d-flex
+        = render 'partials/sort-posts'
       .container.home_exterior_container.justify-content-start
         .col-md-12
           #posts-container
-            = render partial: 'partials/posts-list', locals: { posts: @posts }
+            = render partial: 'partials/posts-list'

@@ -56,5 +56,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const formId = `#commentcomment-form-${this.dataset.commentId}`;
       document.querySelector(formId).classList.toggle('hidden');
   })
-});
 
+  var sort = $('#hidden-sort-field').val();
+
+  $(document).on('click', '.sort-option', function (){
+    sort = $(this).data('sort');
+    $('#hidden-sort-field').val(sort);
+  });
+
+  $(document).on('click', '#clear-filters-button', function (){
+    $('.author-filter').val('');
+    $('.text-filter').val('');
+    $('input[name="published_date"]').prop('checked', false);
+    var author = $('.author-filter').val();
+    var text = $('.text-filter').val();
+    var publishedDate = $('input[name="published_date"]:checked').val();
+
+    $.ajax({
+      url: '/',
+      type: 'GET',
+      data: {
+        author: author,
+        text: text,
+        published_date: publishedDate,
+        sort: sort
+      },
+      dataType: 'script'
+    });
+  })
+});

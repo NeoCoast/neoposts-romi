@@ -26,5 +26,24 @@ RSpec.describe Post, type: :model do
         expect(Post.order_by_param('trending')).to eq([trending_post, old_post, new_post])
       end
     end
+
+    context 'filter_by_param' do
+      it 'filters by author' do
+        author = old_post.user.nickname
+        expect(Post.filter_by(author, '', '')).to eq([old_post])
+      end
+
+      it 'filters by title text' do
+        expect(Post.filter_by('', new_post.title, '')).to eq([new_post])
+      end
+
+      it 'filters by body text' do
+        expect(Post.filter_by('', new_post.body, '')).to eq([new_post])
+      end
+
+      it 'filters by date' do
+        expect(Post.filter_by('', '', 'last_day')).to eq([old_post, trending_post, new_post])
+      end
+    end
   end
 end

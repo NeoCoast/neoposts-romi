@@ -1,0 +1,25 @@
+.container
+  %button.btn.btn-primary#filter-toggler{ type: "button", "data-bs-toggle": "collapse", "data-bs-target": "#filter-options", aria: { expanded: "false" } }
+    Filter posts
+  .collapse#filter-options
+    = form_tag(root_path, method: :get, remote: true) do
+      = hidden_field_tag :sort, @sort, id: 'hidden-sort-field'
+      .filter-section
+        %p.filter-title Filter by Author
+        = text_field_tag :author, @filters[0], class: 'input form-control filter-input author-filter', placeholder: 'Author'
+      .filter-section
+        %p.filter-title Filter by Text
+        = text_field_tag :text, @filters[1], class: 'input form-control filter-input text-filter', placeholder: 'Text'
+      .filter-section.date-filter-section
+        %p.filter-title Filter by Date
+        .btn-group{ role: 'group', 'aria-label': 'Basic radio toggle button group' }
+          = radio_button_tag :published_date, 'last_day', @filters[2] == 'last_day', class: 'btn-check', id: 'last_day_btn'
+          = label_tag 'last_day_btn', 'Last day', class: 'btn btn-outline-primary btn-day-filter last-day'
+          = radio_button_tag :published_date, 'last_week', @filters[2] == 'last_week', class: 'btn-check', id: 'last_week_btn'
+          = label_tag 'last_week_btn', 'Last week', class: 'btn btn-outline-primary btn-day-filter last-week'
+          = radio_button_tag :published_date, 'last_month', @filters[2] == 'last_month', class: 'btn-check', id: 'last_month_btn'
+          = label_tag 'last_month_btn', 'Last month', class: 'btn btn-outline-primary btn-day-filter last-month'
+      .row.filter-buttons
+        = button_tag 'Apply filters', class: 'btn btn-primary btn-apply-filter', id: 'apply-filters-button', type: 'submit'
+      .row.filter-buttons
+        = button_tag 'Clear filters', class: 'btn btn-secondary btn-clear-filter', id: 'clear-filters-button'
