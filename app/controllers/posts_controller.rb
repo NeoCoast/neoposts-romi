@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  before_action :set_sort_and_filters, only: :index
+
   def show
     @post = Post.find(params[:id])
   end
 
   def index
-    @posts = current_user.following_posts.order_by_param(params[:sort])
+    @posts = current_user.following_posts.filter_by(@filters[0], @filters[1], @filters[2]).order_by_param(@sort)
 
     respond_to do |format|
       format.html
@@ -38,5 +40,24 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body, :image)
+  end
+
+  def sort_label
+    case @sort
+    when 'most_liked'
+      'Most Liked'
+    when 'trending'
+      'Trending'
+    else
+      'Newest'
+    end
+  end
+
+  def set_sort_and_filters
+    author = params[:author].to_s.gsub('@', '').strip
+    text = params[:text].to_s.gsub('@', '').strip
+    @filters = [author, text, params[:published_date]]
+    @sort = params[:sort]
+    @sort_label = sort_label
   end
 end

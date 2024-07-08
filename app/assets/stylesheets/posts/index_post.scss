@@ -27,7 +27,6 @@
   border-radius: 5px; 
   border: solid #566d96;
   height: 40px;
-  margin-left: 780px;
   outline: none;
   text-align: center;
   cursor: pointer;
@@ -35,6 +34,13 @@
   &:hover {
     opacity: 0.8;
   }
+}
+
+.order-by-title {
+  width: 90px;
+  color: #566d96;
+  align-content: center;
+  margin-left: 20px;
 }
 
 .order-selector {
