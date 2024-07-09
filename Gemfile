@@ -74,3 +74,5 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'image_processing', '>= 1.2'
 
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
+
+gem 'devise_token_auth', git: 'https://github.com/lynndylanhurley/devise_token_auth', ref: '6b0659f'
