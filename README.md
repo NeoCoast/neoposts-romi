@@ -110,3 +110,50 @@
     ]
 }
 ```
+
+## GET /api/v1/users/:user_id/posts
+- Params: user_id
+- Body: None
+- Headers:
+  - Authorization: Bearer token retreived when user is signed in successfully
+
+#### Responses
+- Success 200: Renders the posts list for the user in JSON format
+```
+{
+    "posts": [
+        {
+            "id": 14,
+            "title": "Geodes",
+            "body": "You can bring your geodes to open",
+            "published_at": "2024-06-03T13:34:52.438Z",
+            "comments_count": 2,
+            "likes_count": 0
+        },
+        {
+            "id": 13,
+            "title": "Hi",
+            "body": "Shop opens at 9:00",
+            "published_at": "2024-06-03T13:34:15.237Z",
+            "comments_count": 2,
+            "likes_count": 2
+        }
+    ]
+}
+```
+
+- Not Found 404: When user does not exist renders the following error message:
+```
+{
+    "message": "User not found"
+}
+```
+
+- Unauthorized 401: Renders the following error message:
+```
+{
+    "errors": [
+        "You need to sign in or sign up before continuing."
+    ]
+}
+```
