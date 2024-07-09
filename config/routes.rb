@@ -19,4 +19,11 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
 
   resources :likes, only: [:create, :destroy]
+
+  namespace :api do
+    namespace :v1, defaults: { format: 'json' } do
+      mount_devise_token_auth_for 'User', at: 'auth'
+      resources :users, only: [:index]
+    end
+  end
 end

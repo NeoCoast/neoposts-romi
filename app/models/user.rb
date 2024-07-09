@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
+  include DeviseTokenAuth::Concerns::User
+
   validates :email, :nickname, :first_name, :last_name, :birthday, presence: true
   validates :nickname, uniqueness: { case_sensitive: false }
   validates :first_name, :last_name, format: { with: /\A[a-zA-Z\.]+\z/, message: 'only allows letters' }
