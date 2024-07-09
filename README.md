@@ -127,28 +127,85 @@
             "title": "Geodes",
             "body": "You can bring your geodes to open",
             "published_at": "2024-06-03T13:34:52.438Z",
-            "comments_count": 2,
-            "likes_count": 0
+            "likes_count": 0,
+            "comments_count": 2
         },
         {
             "id": 13,
             "title": "Hi",
             "body": "Shop opens at 9:00",
             "published_at": "2024-06-03T13:34:15.237Z",
-            "comments_count": 2,
-            "likes_count": 2
+            "likes_count": 2,
+            "comments_count": 2
         }
     ]
 }
 ```
-
 - Not Found 404: When user does not exist renders the following error message:
 ```
 {
     "message": "User not found"
 }
 ```
+- Unauthorized 401: Renders the following error message:
+```
+{
+    "errors": [
+        "You need to sign in or sign up before continuing."
+    ]
+}
+```
 
+## GET /api/v1/posts/:post_id
+- Params: post_id
+- Body: None
+- Headers:
+  - Authorization: Bearer token retreived when user is signed in successfully
+
+#### Responses
+- Success 200: Renders the post details with likes, comments and replies in JSON format
+```
+{
+    "id": 13,
+    "title": "Hi",
+    "body": "Shop opens at 9:00",
+    "published_at": "2024-06-03T13:34:15.237Z",
+    "user_id": 17,
+    "likes": [
+        {
+            "user_id": 12,
+            "nickname": "em_"
+        },
+        {
+            "user_id": 14,
+            "nickname": "linus90"
+        }
+    ],
+    "comments": [
+        {
+            "id": 234,
+            "body": "ksdnfoasi",
+            "replies": [
+                {
+                    "id": 238,
+                    "body": "lalala"
+                }
+            ]
+        },
+        {
+            "id": 235,
+            "body": "adsopij",
+            "replies": []
+        }
+    ]
+}
+```
+- Not Found 404: When post does not exist renders the following error message:
+```
+{
+    "message": "Post not found"
+}
+```
 - Unauthorized 401: Renders the following error message:
 ```
 {
