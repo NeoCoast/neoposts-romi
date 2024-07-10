@@ -214,3 +214,55 @@
     ]
 }
 ```
+
+## POST /api/v1/users/:user_id/posts
+- Params: user_id
+- Body: {
+          "post": {
+            "title": "title",
+            "body": "body"
+          }
+        }
+- Headers:
+  - Authorization: Bearer token retreived when user is signed in successfully
+
+#### Responses
+- Created 201: Renders the created post details in JSON format
+```
+{
+    "id": 26,
+    "title": "New post title 2",
+    "body": "This is my other new post.",
+    "published_at": "2024-07-10T12:53:37.186Z",
+    "likes_count": 0
+}
+```
+- Unauthorized 401: Renders the following error message when user_id is not the same as the current logged user:
+```
+{
+    "message": "Unauthorized"
+}
+```
+- Bad Request 400: Renders the following error message when invalid parameters are entered:
+```
+{
+    "errors": [
+        "Title can't be blank",
+        "Body can't be blank"
+    ]
+}
+```
+- Not Found 404: When user does not exist renders the following error message:
+```
+{
+    "message": "User not found"
+}
+```
+- Unauthorized 401: Renders the following error message when no logged user:
+```
+{
+    "errors": [
+        "You need to sign in or sign up before continuing."
+    ]
+}
+```
