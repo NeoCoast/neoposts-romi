@@ -148,4 +148,111 @@ RSpec.describe Api::V1::PostsController, type: :request do
       end
     end
   end
+
+  describe 'POST #create' do
+    let!(:users) { create_list(:user, 2) }
+    let(:post_attributes) { attributes_for(:post) }
+
+    context 'when user is authenticated' do
+      let(:auth_headers) { users[0].create_new_auth_token }
+
+      context 'when user exists' do
+        context 'when logged user creates a post with valid attributes' do
+          before do
+            sign_in users[0]
+            post api_v1_user_posts_path(users[0]), params: { post: post_attributes }, headers: auth_headers
+          end
+
+          it 'returns http created' do
+            expect(response).to have_http_status(:created)
+          end
+
+          it 'creates a new post' do
+            expect do
+              post api_v1_user_posts_path(users[0]), params: { post: post_attributes }, headers: auth_headers
+            end.to change(Post, :count).by(1)
+          end
+
+          it 'returns the correct post attributes in the response' do
+            json_response = JSON.parse(response.body)
+            expect(json_response).to include(
+              'title' => post_attributes[:title],
+              'body' => post_attributes[:body]
+            )
+          end
+        end
+
+        context 'when logged user creates a post with invalid attributes' do
+          let(:invalid_post_attributes) { { title: '', body: '' } }
+
+          before do
+            sign_in users[0]
+            post api_v1_user_posts_path(users[0]), params: { post: invalid_post_attributes }, headers: auth_headers
+          end
+
+          it 'returns http created' do
+            expect(response).to have_http_status(:bad_request)
+          end
+
+          it 'does not create a new post' do
+            expect do
+              post api_v1_user_posts_path(users[0]), params: { post: invalid_post_attributes }, headers: auth_headers
+            end.not_to change(Post, :count)
+          end
+
+          it 'returns the validation errors in the response' do
+            json_response = JSON.parse(response.body)
+            expect(json_response['errors']).to include(
+              "Title can't be blank",
+              "Body can't be blank"
+            )
+          end
+        end
+
+        context 'when trying to create a post for a user different to the logged one' do
+          before do
+            sign_in users[0]
+            post api_v1_user_posts_path(users[1]), params: { post: post_attributes }, headers: auth_headers
+          end
+
+          it 'returns http unauthorized' do
+            expect(response).to have_http_status(:unauthorized)
+          end
+
+          it 'JSON body response indicates that user is unauthorized' do
+            expect(response.body).to include('Unauthorized')
+          end
+        end
+      end
+
+      context 'when user does not exist' do
+        before do
+          post api_v1_user_posts_path('non_existing'), params: { post: post_attributes }, headers: auth_headers
+        end
+
+        it 'returns a not found response' do
+          expect(response).to have_http_status(:not_found)
+        end
+
+        it 'returns an error message' do
+          json_response = JSON.parse(response.body)
+          expect(json_response['message']).to eq('User not found')
+        end
+      end
+    end
+
+    context 'when user is not authenticated' do
+      before do
+        post api_v1_user_posts_path(users[0]), params: { post: post_attributes }
+      end
+
+      it 'returns http unauthorized' do
+        expect(response.status).to eq(401)
+      end
+
+      it 'JSON body response indicates that authentication is required' do
+        expect(response.body).to include('You need to sign in or sign up before continuing.')
+      end
+    end
+  end
 end
