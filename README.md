@@ -237,12 +237,21 @@
     "likes_count": 0
 }
 ```
-- Unauthorized 401: Renders the following error message when user_id is not the same as the current logged user:
-```
-{
-    "message": "Unauthorized"
-}
-```
+- Unauthorized 401: 
+  - Renders the following error message when user_id is not the same as the current logged user:
+  ```
+  {
+      "message": "Unauthorized"
+  }
+  ```
+  - Renders the following error message when no logged user:
+  ```
+  {
+      "errors": [
+          "You need to sign in or sign up before continuing."
+      ]
+  }
+  ```
 - Bad Request 400: Renders the following error message when invalid parameters are entered:
 ```
 {
@@ -258,11 +267,56 @@
     "message": "User not found"
 }
 ```
-- Unauthorized 401: Renders the following error message when no logged user:
+
+## PUT /api/v1/posts/:post_id
+- Params: post_id
+- Body: {
+          "post": {
+            "title": "updated title",
+            "body": "updated body"
+          }
+        }
+- Headers:
+  - Authorization: Bearer token retreived when user is signed in successfully
+
+#### Responses
+- Success 200: Renders the updated post details in JSON format
+```
+{
+    "id": 27,
+    "title": "updated title",
+    "body": "updated body",
+    "published_at": "2024-07-10T13:19:47.308Z",
+    "likes_count": 0
+}
+```
+- Unauthorized 401: 
+  - Renders the following error message when the post does not belong to the logged user:
+  ```
+  {
+      "message": "Unauthorized"
+  }
+  ```
+  - Renders the following error message when no logged user:
+  ```
+  {
+      "errors": [
+          "You need to sign in or sign up before continuing."
+      ]
+  }
+  ```
+- Bad Request 400: Renders the following error message when invalid parameters are entered:
 ```
 {
     "errors": [
-        "You need to sign in or sign up before continuing."
+        "Title can't be blank",
+        "Body can't be blank"
     ]
+}
+```
+- Not Found 404: When post does not exist renders the following error message:
+```
+{
+    "message": "Post not found"
 }
 ```

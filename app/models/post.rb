@@ -37,7 +37,7 @@ class Post < ApplicationRecord
 
     case published_date
     when 'last_day'
-      where('published_at >= ?', 1.day.ago)
+      where('published_at >= ?', 1.day.ago.beginning_of_day)
     when 'last_week'
       where('published_at >= ?', 1.week.ago)
     when 'last_month'

@@ -28,7 +28,7 @@ Rails.application.routes.draw do
         resources :posts, only: [:index, :create]
       end
 
-      resources :posts, only: [:show]
+      resources :posts, only: [:show, :update]
     end
   end
 end

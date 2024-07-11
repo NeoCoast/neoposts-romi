@@ -190,7 +190,8 @@ RSpec.describe 'Posts', type: :request do
 
         it 'shows followed user posts filtered by the author' do
           get root_path(author: users[1].nickname)
-          expect(assigns(:posts)).to eq(users[0].following_posts.filter_by(users[1].nickname, '', '').reverse)
+          expect(assigns(:posts)).to eq(users[0].following_posts.filter_by(users[1].nickname, '',
+                                                                           '').sort_by(&:published_at).reverse)
         end
 
         it 'doesn`t show not followed user posts' do
@@ -220,7 +221,8 @@ RSpec.describe 'Posts', type: :request do
 
         it 'shows followed user posts filtered by post text' do
           get root_path(text: posts_user1[0].title)
-          expect(assigns(:posts)).to eq(users[0].following_posts.filter_by('', posts_user1[0].title, '').reverse)
+          expect(assigns(:posts)).to eq(users[0].following_posts.filter_by('', posts_user1[0].title,
+                                                                           '').sort_by(&:published_at).reverse)
         end
 
         it 'doesn`t show not followed user posts' do
@@ -236,7 +238,7 @@ RSpec.describe 'Posts', type: :request do
 
       context 'when user filters by date' do
         it 'returns HTTP success' do
-          get root_path
+          get root_path(published_date: 'last_week')
           expect(response).to be_successful
         end
 
@@ -249,16 +251,17 @@ RSpec.describe 'Posts', type: :request do
 
         it 'shows followed user posts filtered by published date' do
           get root_path(published_date: 'last_day')
-          expect(assigns(:posts)).to eq(users[0].following_posts.filter_by('', '', 'last_day').reverse)
+          expect(assigns(:posts)).to eq(users[0].following_posts.filter_by('', '',
+                                                                           'last_day').sort_by(&:published_at).reverse)
         end
 
         it 'doesn`t show not followed user posts' do
-          get root_path
+          get root_path(published_date: 'last_week')
           expect(assigns(:posts)).not_to include(posts_user2)
         end
 
         it 'doesn`t show logged user posts' do
-          get root_path
+          get root_path(published_date: 'last_week')
           expect(assigns(:posts)).not_to include(posts_user0)
         end
       end
