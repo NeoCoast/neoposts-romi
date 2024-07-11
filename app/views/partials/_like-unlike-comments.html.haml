@@ -1,4 +1,4 @@
-.like-unlike-container{id: "like_unlike_container-#{comment.id}"}
+.like-unlike-container{id: "like_unlike_container-#{comment.id}-#{comment.class}"}
   - if current_user.liked_comments?(comment)
     = render partial: 'partials/unlike', locals: { likable: comment, current_user: current_user}
   - else
