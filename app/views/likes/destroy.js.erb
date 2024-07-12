@@ -1,2 +1,2 @@
-$('#like_unlike_container-<%= @likable.id %>').html('<%= j(render partial: "partials/like", locals: { likable: @likable }) %>');
-$('#likes-container-<%= @likable.id %>').html('<%= j(render partial: "partials/like-stats", locals: { likable: @likable }) %>');
+$('#like_unlike_container-<%= @likable.id %>-<%= @likable.class %>').html('<%= j(render partial: "partials/like", locals: { likable: @likable }) %>');
+$('#likes-container-<%= @likable.id %>-<%= @likable.class %>').html('<%= j(render partial: "partials/like-stats", locals: { likable: @likable }) %>');

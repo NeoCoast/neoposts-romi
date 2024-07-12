@@ -25,11 +25,11 @@ class Post < ApplicationRecord
   }
 
   scope :by_author, lambda { |author|
-    joins(:user).where('users.nickname LIKE ?', "%#{author}%") if author.present?
+    joins(:user).where('users.nickname ILIKE ?', "%#{author}%") if author.present?
   }
 
   scope :by_text, lambda { |text|
-    where('title LIKE ? OR body LIKE ?', "%#{text}%", "%#{text}%") if text.present?
+    where('title ILIKE ? OR body ILIKE ?', "%#{text}%", "%#{text}%") if text.present?
   }
 
   scope :by_published_date, lambda { |published_date|

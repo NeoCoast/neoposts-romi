@@ -1,4 +1,7 @@
 .panel.following-list#following-list
-  - user.following.each do |following_user|
-    = link_to show_user_path(following_user.nickname), class: "user-profile-link", id: "user-profile-following-list" do
-      = render partial: 'partials/user', locals: { user: following_user }
+  - if user.following.count > 0
+    - user.following.each do |following_user|
+      = link_to show_user_path(following_user.nickname), class: "user-profile-link", id: "user-profile-following-list" do
+        = render partial: 'partials/user', locals: { user: following_user }
+  - else
+    %p.no-users-to-show No users to show :(
