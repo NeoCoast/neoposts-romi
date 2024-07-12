@@ -10,8 +10,8 @@ module Api
 
       private
 
-      def record_not_found(exception)
-        render json: { message: "#{exception.model} not found" }, status: :not_found
+      def record_not_found
+        render json: { message: 'Unauthorized' }, status: :unauthorized
       end
     end
   end
