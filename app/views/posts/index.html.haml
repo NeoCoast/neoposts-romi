@@ -1,21 +1,13 @@
 .container-fluid
   .row
-    = render 'partials/sidecard'
-    .container.home_exterior_container.justify-content-start
-      .col-md-12
-        - if @posts.any?
-          - @posts.each_with_index do |post, index|
-            = render partial: 'partials/post', locals: { post: post }
-            .container.d-flex.posts-icons-container
-              = render partial: 'partials/like-unlike-posts', locals: { post: post, curent_user: current_user }
-              %i.bi.bi-chat-right.toggle-comments{id: "toggle-postcomment-#{post.id}", data: { post_id: post.id }}
-            .container.hidden{id: "comments-#{post.id}", data: { post_id: post.id }}
-              - if post.comments.any?
-                - post.comments.order(created_at: :asc).each do |comment|
-                  = render partial: 'comments/show-comment', locals: { comment: comment }
-              - else
-                %p.no-comments No comments yet
-            - unless index == @posts.size - 1 || @posts.count==0
-              %hr.post-separation
-        - else
-          %p.no-posts No posts to show :(
+    .index-sidecard
+      = render 'partials/sidecard'
+      .filters#filter-posts-by
+        = render 'partials/filter-posts'
+    .container.exterior_container
+      #sort-posts-by.d-flex
+        = render 'partials/sort-posts'
+      .container.home_exterior_container.justify-content-start
+        .col-md-12
+          #posts-container
+            = render partial: 'partials/posts-list'

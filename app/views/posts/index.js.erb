@@ -1,0 +1,4 @@
+$("#posts-container").html("<%= j(render partial: 'partials/posts-list', posts: @posts) %>");
+$("#filter-posts-by").html("<%= j(render partial: 'partials/filter-posts') %>");
+$("#sort-posts-by").html("<%= j(render partial: 'partials/sort-posts' ) %>");
+

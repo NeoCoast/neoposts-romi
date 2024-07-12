@@ -30,3 +30,16 @@
 .followers-list {
   width: fit-content;
 }
+
+.underlined {
+  border-bottom: solid #566d96 1px;
+}
+
+.no-users-to-show {
+  text-align: center;
+  color: #566d96;
+  font-size: large;
+  height: 120px;
+  padding-top: 50px;
+  margin-left: 323px;
+}

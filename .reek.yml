@@ -3,6 +3,11 @@ detectors:
     enabled: false
   InstanceVariableAssumption:
     enabled: false
+  TooManyInstanceVariables:
+    max_instance_variables: 5
+  UncommunicativeModuleName:
+    accept:
+      - V1
 
 exclude_paths:
 - "./db/migrate/*"

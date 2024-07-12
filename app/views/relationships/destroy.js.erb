@@ -3,3 +3,4 @@ $('#following-count').html('<%= @user.following.count %>');
 $('#followers-count').html('<%= @user.followers.count %>');
 $('#following-list').html('<%= escape_javascript(render(partial: 'partials/user', collection: @user.following, as: :user)) %>');
 $('#followers-list').html('<%= escape_javascript(render(partial: 'partials/user', collection: @user.followers, as: :user)) %>');
+

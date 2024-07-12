@@ -1,0 +1,10 @@
+%span.order-by-title Order by
+.dropdown.order-selector-button
+  %a.order-selector.dropdown-toggle{ role: "button", "data-bs-toggle": "dropdown", aria: { expanded: "false" }, id: "dropdownMenuButton" }= @sort_label
+  %ul.dropdown-menu
+    = link_to root_path(sort: 'newest_first', author: @filters[0], text: @filters[1], published_date: @filters[2]), remote: true, class: 'dropdown-item sort-option', data: { sort: 'newest_first' } do
+      Newest
+    = link_to root_path(sort: 'most_liked', author: @filters[0], text: @filters[1], published_date: @filters[2]), remote: true, class: 'dropdown-item sort-option', data: { sort: 'most_liked' } do
+      Most Liked
+    = link_to root_path(sort: 'trending', author: @filters[0], text: @filters[1], published_date: @filters[2]), remote: true, class: 'dropdown-item sort-option', data: { sort: 'trending' } do
+      Trending

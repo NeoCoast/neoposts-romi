@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/lynndylanhurley/devise_token_auth
+  revision: 6b0659f18c678b319913d0fb053e96aa555857aa
+  ref: 6b0659f
+  specs:
+    devise_token_auth (1.2.2)
+      bcrypt (~> 3.0)
+      devise (> 3.5.2, < 5)
+      rails (>= 4.2.0, < 7.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -374,6 +384,7 @@ DEPENDENCIES
   database_cleaner-active_record (~> 2.1)
   debug
   devise (~> 4.9, >= 4.9.4)
+  devise_token_auth!
   factory_bot_rails
   faker (~> 3.3, >= 3.3.1)
   haml-rails (~> 2.0)

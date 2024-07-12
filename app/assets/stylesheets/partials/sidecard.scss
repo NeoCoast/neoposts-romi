@@ -4,7 +4,7 @@
   max-width: 200px; 
   height: 430px;
   border: solid #c3cce8;
-  margin-left: 150px;
+  margin-left: 120px;
   margin-top: 40px;
   margin-right: 20px;
 
@@ -33,6 +33,12 @@ hr {
   padding: 0!important;
   text-decoration: underline;
   cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover{
+    opacity: 0.8;
+  }
 }
 
 .sidecard {

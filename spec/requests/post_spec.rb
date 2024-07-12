@@ -35,41 +35,235 @@ RSpec.describe 'Posts', type: :request do
 
   describe 'GET index' do
     context 'when user is authenticated' do
-      let!(:users) { create_list(:user, 3) }
-      let!(:posts_user0) { create_list(:post, 3, user: users[0]) }
-      let!(:posts_user1) { create_list(:post, 3, user: users[1]) }
-      let!(:posts_user2) { create_list(:post, 3, user: users[2]) }
+      let!(:users) { create_list(:user, 4) }
+      let!(:posts_user0) { create_list(:post, 3, :liked_and_commented, user: users[0]) }
+      let!(:posts_user1) { create_list(:post, 3, :liked_and_commented, user: users[1]) }
+      let!(:posts_user2) { create_list(:post, 3, :liked_and_commented, user: users[2]) }
+      let!(:posts_user3) { create_list(:post, 3, :liked_and_commented, user: users[3]) }
 
       before do
         sign_in users[0]
         users[0].follow(users[1])
+        create(:like, likable: posts_user1[0])
+        create(:like, likable: posts_user1[1])
+        create(:like, likable: posts_user1[1])
       end
 
-      it 'returns HTTP success' do
-        get root_path
-        expect(response).to be_successful
-      end
+      context 'when no sort params are selected or user sorts by published date' do
+        it 'returns HTTP success' do
+          get root_path
+          expect(response).to be_successful
+        end
 
-      it 'shows created posts' do
-        get root_path
-        posts_user1.each do |post|
-          expect(response.body).to include(post.body)
+        it 'shows created posts' do
+          get root_path
+          posts_user1.each do |post|
+            expect(response.body).to include(post.body)
+          end
+        end
+
+        it 'shows followed user posts ordered by the newest created' do
+          get root_path
+          expect(assigns(:posts)).to eq(posts_user1.sort_by(&:published_at).reverse)
+        end
+
+        it 'shows followed user posts ordered by the newest created (with sort param)' do
+          get root_path(sort: 'newest_created')
+          expect(assigns(:posts)).to eq(posts_user1.sort_by(&:published_at).reverse)
+        end
+
+        it 'doesn`t show not followed user posts' do
+          get root_path
+          expect(assigns(:posts)).not_to include(posts_user2)
+        end
+
+        it 'doesn`t show logged user posts' do
+          get root_path
+          expect(assigns(:posts)).not_to include(posts_user0)
         end
       end
 
-      it 'shows followed user posts ordered by the newest created' do
-        get root_path
-        expect(assigns(:posts)).to eq(posts_user1.sort_by(&:published_at).reverse)
+      context 'when user sorts by most liked' do
+        it 'returns HTTP success' do
+          get root_path(sort: 'most_liked')
+          expect(response).to be_successful
+        end
+
+        it 'shows created posts' do
+          get root_path(sort: 'most_liked')
+          posts_user1.each do |post|
+            expect(response.body).to include(post.body)
+          end
+        end
+
+        it 'shows followed user posts ordered by the most liked' do
+          get root_path(sort: 'most_liked')
+          expect(assigns(:posts)).to eq(posts_user1.sort_by(&:likes_count).reverse)
+        end
+
+        it 'doesn`t show not followed user posts' do
+          get root_path(sort: 'most_liked')
+          expect(assigns(:posts)).not_to include(posts_user2)
+        end
+
+        it 'doesn`t show logged user posts' do
+          get root_path(sort: 'most_liked')
+          expect(assigns(:posts)).not_to include(posts_user0)
+        end
       end
 
-      it 'doesn`t show not followed user posts' do
-        get root_path
-        expect(assigns(:posts)).not_to include(posts_user2)
+      context 'when user sorts by trending' do
+        it 'returns HTTP success' do
+          get root_path(sort: 'trending')
+          expect(response).to be_successful
+        end
+
+        it 'shows created posts' do
+          get root_path(sort: 'trending')
+          posts_user1.each do |post|
+            expect(response.body).to include(post.body)
+          end
+        end
+
+        it 'shows followed user posts ordered by trending' do
+          get root_path(sort: 'trending')
+          trending_posts = users[1].posts.order_by_param('trending')
+          expect(assigns(:posts)).to eq(trending_posts)
+        end
+
+        it 'doesn`t show not followed user posts' do
+          get root_path(sort: 'trending')
+          expect(assigns(:posts)).not_to include(posts_user2)
+        end
+
+        it 'doesn`t show logged user posts' do
+          get root_path(sort: 'trending')
+          expect(assigns(:posts)).not_to include(posts_user0)
+        end
       end
 
-      it 'doesn`t show logged user posts' do
-        get root_path
-        expect(assigns(:posts)).not_to include(posts_user0)
+      context 'when no sort params are selected' do
+        it 'returns HTTP success' do
+          get root_path
+          expect(response).to be_successful
+        end
+
+        it 'shows created posts' do
+          get root_path
+          posts_user1.each do |post|
+            expect(response.body).to include(post.body)
+          end
+        end
+
+        it 'shows followed user posts ordered by the newest created' do
+          get root_path
+          expect(assigns(:posts)).to eq(posts_user1.sort_by(&:published_at).reverse)
+        end
+
+        it 'doesn`t show not followed user posts' do
+          get root_path
+          expect(assigns(:posts)).not_to include(posts_user2)
+        end
+
+        it 'doesn`t show logged user posts' do
+          get root_path
+          expect(assigns(:posts)).not_to include(posts_user0)
+        end
+      end
+
+      context 'when user filters by author' do
+        before do
+          users[0].follow(users[3])
+        end
+
+        it 'returns HTTP success' do
+          get root_path
+          expect(response).to be_successful
+        end
+
+        it 'shows created posts' do
+          get root_path
+          posts_user1.each do |post|
+            expect(response.body).to include(post.body)
+          end
+        end
+
+        it 'shows followed user posts filtered by the author' do
+          get root_path(author: users[1].nickname)
+          expect(assigns(:posts)).to eq(users[0].following_posts.filter_by(users[1].nickname, '',
+                                                                           '').sort_by(&:published_at).reverse)
+        end
+
+        it 'doesn`t show not followed user posts' do
+          get root_path
+          expect(assigns(:posts)).not_to include(posts_user2)
+          expect(assigns(:posts)).not_to include(posts_user3)
+        end
+
+        it 'doesn`t show logged user posts' do
+          get root_path
+          expect(assigns(:posts)).not_to include(posts_user0)
+        end
+      end
+
+      context 'when user filters by text' do
+        it 'returns HTTP success' do
+          get root_path
+          expect(response).to be_successful
+        end
+
+        it 'shows created posts' do
+          get root_path
+          posts_user1.each do |post|
+            expect(response.body).to include(post.body)
+          end
+        end
+
+        it 'shows followed user posts filtered by post text' do
+          get root_path(text: posts_user1[0].title)
+          expect(assigns(:posts)).to eq(users[0].following_posts.filter_by('', posts_user1[0].title,
+                                                                           '').sort_by(&:published_at).reverse)
+        end
+
+        it 'doesn`t show not followed user posts' do
+          get root_path
+          expect(assigns(:posts)).not_to include(posts_user2)
+        end
+
+        it 'doesn`t show logged user posts' do
+          get root_path
+          expect(assigns(:posts)).not_to include(posts_user0)
+        end
+      end
+
+      context 'when user filters by date' do
+        it 'returns HTTP success' do
+          get root_path(published_date: 'last_week')
+          expect(response).to be_successful
+        end
+
+        it 'shows created posts' do
+          get root_path
+          posts_user1.each do |post|
+            expect(response.body).to include(post.body)
+          end
+        end
+
+        it 'shows followed user posts filtered by published date' do
+          get root_path(published_date: 'last_day')
+          expect(assigns(:posts)).to eq(users[0].following_posts.filter_by('', '',
+                                                                           'last_day').sort_by(&:published_at).reverse)
+        end
+
+        it 'doesn`t show not followed user posts' do
+          get root_path(published_date: 'last_week')
+          expect(assigns(:posts)).not_to include(posts_user2)
+        end
+
+        it 'doesn`t show logged user posts' do
+          get root_path(published_date: 'last_week')
+          expect(assigns(:posts)).not_to include(posts_user0)
+        end
       end
     end
 

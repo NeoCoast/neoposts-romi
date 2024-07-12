@@ -1,6 +1,10 @@
 
 <% if @commentable.is_a?(Post) %>
-  $("#comments-count").text("<%= j @commentable.comments.count %> Comments");
+  <% if @commentable.comments.count == 1 %>
+    $("#comments-count").text("<%= j @commentable.comments.count %> Comment");
+  <% else %>
+    $("#comments-count").text("<%= j @commentable.comments.count %> Comments");
+  <% end %>
 <% end %>
 
 <% if @comment.commentable_type == 'Post' %>
