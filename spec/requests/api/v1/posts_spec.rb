@@ -46,12 +46,12 @@ RSpec.describe Api::V1::PostsController, type: :request do
         end
 
         it 'returns a not found response' do
-          expect(response).to have_http_status(:not_found)
+          expect(response).to have_http_status(:unauthorized)
         end
 
         it 'returns an error message' do
           json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq('User not found')
+          expect(json_response['message']).to eq('Unauthorized')
         end
       end
     end
@@ -124,12 +124,12 @@ RSpec.describe Api::V1::PostsController, type: :request do
         end
 
         it 'returns a not found response' do
-          expect(response).to have_http_status(:not_found)
+          expect(response).to have_http_status(:unauthorized)
         end
 
         it 'returns an error message' do
           json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq('Post not found')
+          expect(json_response['message']).to eq('Unauthorized')
         end
       end
     end
@@ -231,12 +231,12 @@ RSpec.describe Api::V1::PostsController, type: :request do
         end
 
         it 'returns a not found response' do
-          expect(response).to have_http_status(:not_found)
+          expect(response).to have_http_status(:unauthorized)
         end
 
         it 'returns an error message' do
           json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq('User not found')
+          expect(json_response['message']).to eq('Unauthorized')
         end
       end
     end
@@ -336,12 +336,12 @@ RSpec.describe Api::V1::PostsController, type: :request do
         end
 
         it 'returns a not found response' do
-          expect(response).to have_http_status(:not_found)
+          expect(response).to have_http_status(:unauthorized)
         end
 
         it 'returns an error message' do
           json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq('Post not found')
+          expect(json_response['message']).to eq('Unauthorized')
         end
       end
     end

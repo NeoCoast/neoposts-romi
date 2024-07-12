@@ -62,7 +62,11 @@ class User < ApplicationRecord
   end
 
   scope :search_by_param, lambda { |search_param|
-    if search_param.present?
+    params = search_param.split
+    if params.size == 2
+      where('(first_name ILIKE ? AND last_name ILIKE ?) OR (first_name ILIKE ? AND last_name ILIKE ?)',
+            "%#{params[0]}%", "%#{params[1]}%", "%#{params[1]}%", "%#{params[0]}%")
+    else
       where('nickname ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?',
             "%#{search_param}%", "%#{search_param}%", "%#{search_param}%")
     end
